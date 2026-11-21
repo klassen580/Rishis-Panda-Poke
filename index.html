@@ -535,6 +535,7 @@ body[data-view=games] .mast,body[data-view=parent] .mast{padding-bottom:clamp(12
 .shopts .right{background:#c8e6c9;border-color:#2e7d32}.shopts .wrong{background:#ffcdd2}
 .ttt{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-width:360px;margin:10px auto}.ttt button{aspect-ratio:1;padding:6px;min-height:0;background:#fffaf0;font-size:54px}
 .ttt img{width:100%;height:100%;object-fit:contain}.tttwrap .rchief img{width:100px}
+a.tile.rbx{text-decoration:none;color:var(--ink);display:flex;border:2px solid var(--ink);background:#fffaf0}a.tile.rbx .tb{width:auto;align-self:flex-start}a.tile.rbx:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
 /* ===== Art Studio ===== */
 .studio .shead{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px}.studio .shead h2{flex:1;margin:0;font-size:24px;min-width:160px}
 .sacts{display:flex;gap:8px;flex-wrap:wrap}.abk{min-height:44px}
@@ -1153,7 +1154,7 @@ function gamesMenu(){
       <span class="tb">${u>all?'🏆 Every level passed!':`Level ${u} of ${all}`}</span></button>`};
   main.innerHTML=`<div class="gchief"><img src="${CHIEF}" alt="Chief Bamboozle"><p class="bubble">${['Pick a game, Rishi! Pip pip!','Fancy a puzzle? Jolly good!','I say, shall we play something?'][DAYN%3]}</p></div><h2 class="sec">Games</h2><div class="grid">${GAMES.filter(g=>g.kind==='game').map(tile).join('')}</div>
     <h2 class="sec">Puzzles</h2><div class="grid">${GAMES.filter(g=>g.kind==='puzzle').map(tile).join('')}</div>
-    <h2 class="sec">Make &amp; Create</h2><div class="grid">${GAMES.filter(g=>g.kind==='make').map(tile).join('')}</div>`;
+    <h2 class="sec">Make &amp; Create</h2><div class="grid">${GAMES.filter(g=>g.kind==='make').map(tile).join('')}</div>${robloxHTML()}`;
 }
 function openGame(id){
   if(id==='colour'){view='art';render();artHome('pages');return}
@@ -1873,6 +1874,8 @@ function parentPage(){
       <small>${ytParse(S.set.ytMusic)?'Saved! Choose “My YouTube playlist” above to use it.':'Used when Music is set to “My YouTube playlist”. Needs internet, and YouTube may show ads.'}</small></label>
     <label class="chk"><input type="checkbox" id="pyt"${S.set.yt!==false?' checked':''}><span>Show Panda TV (YouTube)</span>
       <small>A different hand-picked zoo clip every day on the front page. When a clip ends, YouTube may suggest other videos.</small></label>
+    <label>Roblox games<textarea id="prbx" rows="3" placeholder="Paste Roblox game links here, one per line">${esc((S.set.roblox||[]).map(g=>g.url).join('\n'))}</textarea>
+      <small>${(S.set.roblox||[]).length?`Showing ${(S.set.roblox||[]).map(g=>esc(g.name)).join(', ')} on the Puzzles &amp; games page.`:'Copy a game link from roblox.com (it looks like roblox.com/games/…). They open in the Roblox app.'}</small></label>
     <label>Extra Panda TV clips<textarea id="pytx" rows="3" placeholder="Paste YouTube links here, one per line">${esc((S.set.ytExtra||[]).map(i=>'https://youtu.be/'+i).join('\n'))}</textarea>
       <small>${(S.set.ytExtra||[]).length} extra clip${(S.set.ytExtra||[]).length===1?'':'s'} saved. They join the daily rotation.</small></label>
     <label class="chk"><input type="checkbox" id="pfd"${S.set.feeds?' checked':''}><span>Show photos and videos from the internet feeds</span>
@@ -1898,6 +1901,7 @@ function parentPage(){
   q('pmv').oninput=()=>{S.set.musicVol=+q('pmv').value;save()};
   q('pyt2').onchange=()=>{S.set.ytMusic=q('pyt2').value.trim();save();setTimeout(parentPage,0)};
   q('pvo').onchange=()=>{S.set.voice=q('pvo').checked;save();if(S.set.voice)speak('Jolly good! Hello again, Rishi.')};
+  q('prbx').onchange=()=>{S.set.roblox=robloxParse(q('prbx').value);save();toast(`🎮 ${S.set.roblox.length} Roblox game${S.set.roblox.length===1?'':'s'} saved`);setTimeout(parentPage,0)};
   q('pyt').onchange=()=>{S.set.yt=q('pyt').checked;save()};
   q('pytx').onchange=()=>{S.set.ytExtra=[...new Set([...q('pytx').value.matchAll(YTID)].map(m=>m[1]))];save();toast(`📺 ${S.set.ytExtra.length} extra Panda TV clip${S.set.ytExtra.length===1?'':'s'} saved`);setTimeout(parentPage,0)};
   q('pfd').onchange=()=>{S.set.feeds=q('pfd').checked;save();if(S.set.feeds&&!all.length)start(true).then(()=>{view='parent';render()})};
@@ -2782,6 +2786,14 @@ GAMES.push(
   {id:'ttt',kind:'puzzle',name:'Tic-Tac-Toe with Chief',icon:'⭕',desc:'Pandas vs bamboo. Can you beat the editor?',run:tttGame,levels:[
     {smart:.15,intro:"I'm a bit sleepy today… *yawn*",name:'Sleepy Chief'},{smart:.55,intro:'I say, I have been practising!',name:'Clever Chief'},
     {smart:.9,drawOk:true,intro:'Prepare yourself! I am the champion!',name:'Champion Chief'}]});
+
+// ---- Roblox Corner: grown-up-chosen Roblox games that open in the Roblox app
+function robloxParse(txt){const out=[];String(txt||'').split(/\n+/).forEach(line=>{const m=/(?:https?:\/\/)?(?:www\.|web\.)?roblox\.com\/(?:[a-z]{2}\/)?games\/(\d+)(?:\/([^\s?#]*))?/i.exec(line);if(!m)return;
+  const before=line.slice(0,m.index).replace(/[-–:|]+\s*$/,'').trim(),slug=decodeURIComponent(m[2]||'').replace(/[-_]+/g,' ').trim();
+  if(!out.some(g=>g.id===m[1]))out.push({id:m[1],name:(before||slug||'Roblox game '+m[1]).slice(0,40),url:`https://www.roblox.com/games/${m[1]}${m[2]?'/'+m[2]:''}`})});return out}
+function robloxHTML(){const L=S.set.roblox||[];if(!L.length)return'';
+  return`<h2 class="sec">Roblox Corner</h2><p class="lede">These open in the Roblox app. Come back to Panda Poke when you're done!</p>
+    <div class="grid">${L.map(g=>`<a class="tile rbx" href="${esc(g.url)}" target="_blank" rel="noopener"><span class="ic">🎮</span><span class="tn">${esc(g.name)}</span><span class="td">Opens in Roblox</span><span class="tb">Play ↗</span></a>`).join('')}</div>`}
 
 async function start(force){
   if(!S.set.feeds){all=[];if(view==='today')render();return}
