@@ -594,6 +594,7 @@ a.tile.rbx{text-decoration:none;color:var(--ink);display:flex;border:2px solid v
 .schans{font-size:20px}.schq .row{display:flex;justify-content:center;gap:8px}
 #splash{position:fixed;inset:0;z-index:999;background:#120d1f;display:grid;place-content:center;justify-items:center;color:#ffd77a;transition:opacity .7s}
 #splash img{width:min(50vw,240px)}#splash h1{font-family:'Playfair Display',Georgia,serif;margin:10px 0 0}#splash.gone{opacity:0;pointer-events:none}
+.cdbox{text-align:center}
 /* ===== Art Studio ===== */
 .studio .shead{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px}.studio .shead h2{flex:1;margin:0;font-size:24px;min-width:160px}
 .sacts{display:flex;gap:8px;flex-wrap:wrap}.abk{min-height:44px}
@@ -699,6 +700,7 @@ a.tile.rbx{text-decoration:none;color:var(--ink);display:flex;border:2px solid v
     </section>
     <section class="box"><h3>Did You Know?</h3><p id="fact"></p></section>
     <section class="box weather"><h3>Today's Weather</h3><p id="weather"></p></section>
+    <div id="cdowns"></div>
     <section class="box bdaybox" id="bdaybox" hidden></section>
   </aside>
 </div>
@@ -1741,6 +1743,7 @@ function readPaper(btn){
   const h=new Date().getHours(),tod=h<12?'morning':h<17?'afternoon':'evening',[title,panels]=comicOfDay(),jk=daily(JOKES,1);
   speakAll([`Good ${tod}, Rishi! This is Chief Bamboozle, with Rishi's Panda Poke for ${new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'})}.`,
     ED?`${ED.t} ${ED.m}`:'',
+    ...cdList().map(c=>c.days===0?c.today:c.days===1?`Only one more sleep until ${c.say}!`:`Only ${c.days} sleeps until ${c.say}!`),
     (()=>{const b=bdayInfo();return!b?'':b.days===0?'Happy birthday, Rishi!':b.days===1?'Only one more sleep until your birthday!':`Only ${b.days} sleeps until your birthday!`})(),
     S.set.feeds&&all.length?`Today's top story: ${hl(all[0])}. ${all[0].who.charAt(0).toUpperCase()+all[0].who.slice(1)} ${all[0].cap.charAt(0).toLowerCase()+all[0].cap.slice(1)}`:'',
     `Did you know? ${document.getElementById('fact').textContent}`,`The weather report says: ${document.getElementById('weather').textContent}.`,
@@ -2646,6 +2649,21 @@ function bdayBox(){const box=document.getElementById('bdaybox'),b=bdayInfo();if(
     <div class="bdbar" aria-label="${pct}% of the way there"><i style="width:${pct}%"></i><span>🎂</span></div><p class="bdmsg">${msg}</p>`;
   if(S.bdToast!==today&&([100,50,30,10].includes(b.days)||b.days<=7)){S.bdToast=today;save();setTimeout(()=>toast(`🎂 ${b.days===1?'Just 1 more sleep':b.days+' more sleeps'} until Rishi's birthday!`),4200)}}
 bdayBox();
+// ---- temporary countdowns (they disappear the day after the event)
+const COUNTDOWNS=[
+  {id:'trip',date:'2026-12-19',icon:'🏝️',t:'Caribbean Vacation',sub:'St. Martin!',say:'we fly to St. Martin',today:"Today we fly to St. Martin! Have a wonderful trip, Rishi!",
+    msgs:[[1,'Pack your swimsuit! ✈️'],[7,'Almost beach time! 🌴'],[30,'Sunshine is on its way! ☀️'],[999,'Palm trees and turquoise water ahead!']],bar:'#4fc3f7,#b3ecff',from:'2026-11-21'},
+  {id:'xmas',date:'2026-12-25',icon:'🎄',t:'Christmas Countdown',sub:'Christmas Day',say:'Christmas',today:'Merry Christmas, Rishi! 🎁',
+    msgs:[[1,"Santa is on his way tonight! 🎅"],[7,'So close! Have you been good? 🎁'],[30,'Time to deck the halls! ✨'],[999,'Pandas are making their wish lists!']],bar:'#2e7d32,#e53935',from:'2026-11-21'}];
+function cdList(){const now=new Date(today+'T12:00');return COUNTDOWNS.map(c=>{const d=Math.round((new Date(c.date+'T12:00')-now)/864e5),span=Math.max(1,Math.round((new Date(c.date+'T12:00')-new Date(c.from+'T12:00'))/864e5));return Object.assign({},c,{days:d,span})}).filter(c=>c.days>=0).sort((a,b)=>a.days-b.days)}
+function cdBoxes(){const box=document.getElementById('cdowns');if(!box)return;
+  box.innerHTML=cdList().map(c=>{const ds=new Date(c.date+'T12:00').toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
+    if(c.days===0)return`<section class="box cdbox"><h3>${c.icon} ${c.t}</h3><p class="bdnum">🎉</p><p class="bdtxt"><b>${esc(c.today)}</b></p></section>`;
+    const pct=Math.max(3,Math.min(100,Math.round((1-c.days/c.span)*100))),msg=c.msgs.find(m=>c.days<=m[0])[1];
+    return`<section class="box cdbox"><h3>${c.icon} ${c.t}</h3><p class="bdnum">${c.days}</p><p class="bdtxt"><b>${c.days===1?'sleep':'sleeps'} until ${esc(c.sub)}</b><br><span>${ds}</span></p>
+      <div class="bdbar"><i style="width:${pct}%;background:repeating-linear-gradient(45deg,${c.bar.split(',')[0]} 0 8px,${c.bar.split(',')[1]} 8px 16px)"></i><span>${c.icon}</span></div><p class="bdmsg">${msg}</p></section>`}).join('');
+  const c=cdList()[0];if(c&&S.cdToast!==today&&(c.days<=7||[10,14,21,30].includes(c.days))){S.cdToast=today;save();setTimeout(()=>toast(`${c.icon} ${c.days===0?esc(c.today):c.days===1?'Just 1 more sleep until '+c.sub:c.days+' more sleeps until '+c.sub}`),5200)}}
+cdBoxes();
 
 // ask the browser to keep Rishi's saved data (helps on iPad home-screen apps)
 try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
