@@ -571,10 +571,10 @@ a.tile.rbx{text-decoration:none;color:var(--ink);display:flex;border:2px solid v
 .spring{position:relative;height:min(60vw,380px);border:3px solid var(--ink);border-radius:20px;overflow:hidden;background:linear-gradient(#2a3a5e,#5a6e9a 50%,#7a8a6a 50%,#6a7a5a)}
 .spring .pool{position:absolute;left:6%;right:6%;bottom:8%;height:62%;border-radius:50%;background:#8a8478;box-shadow:inset 0 0 0 10px #a09a8c}
 .spring .water{position:absolute;inset:12% 6% 10%;border-radius:50%;background:radial-gradient(#9ee7f0,#4fb3c8);opacity:.88;z-index:2;pointer-events:none}
-.soaker{position:absolute;bottom:34%;width:24%;transform:translateX(-50%);z-index:1;animation:bob 3s ease-in-out infinite}.soaker img{width:100%}
-@keyframes bob{50%{transform:translate(-50%,6%)}}.spring.splash .water{animation:spl .6s}@keyframes spl{50%{transform:scale(1.04,.94)}}
+.soaker{position:absolute;bottom:34%;width:24%;transform:translateX(-50%);z-index:1;animation:sbob 3s ease-in-out infinite}.soaker img{width:100%}
+@keyframes sbob{50%{transform:translate(-50%,6%)}}@keyframes dbob{50%{transform:translateY(6%)}}.spring.splash .water{animation:spl .6s}@keyframes spl{50%{transform:scale(1.04,.94)}}
 .steamy span{position:absolute;bottom:40%;font-size:40px;color:#fff;opacity:0;z-index:3;animation:steamup2 3s ease-in infinite}@keyframes steamup2{30%{opacity:.7}100%{opacity:0;transform:translateY(-120px)}}
-.duck{position:absolute;top:30%;z-index:3;font-size:34px;animation:bob 2s ease-in-out infinite}#ducks{position:absolute;inset:0;z-index:3}
+.duck{position:absolute;top:30%;z-index:3;font-size:34px;animation:dbob 2s ease-in-out infinite}#ducks{position:absolute;inset:0;z-index:3}
 /* chat */
 .chathead{display:flex;align-items:center;gap:12px}.chathead img{width:90px}.clog{height:min(48vh,380px);overflow:auto;border:2px solid var(--ink);background:#fffaf0;padding:10px;margin:10px 0;display:flex;flex-direction:column;gap:8px}
 .cm{max-width:85%;margin:0;padding:8px 12px;border-radius:16px;font-size:18px;line-height:1.4}.cm.c{background:#f3e3c3;align-self:flex-start;border-bottom-left-radius:4px}.cm.r{background:#c8281a;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
@@ -667,6 +667,11 @@ a.tile.rbx{text-decoration:none;color:var(--ink);display:flex;border:2px solid v
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 .mnap{display:grid;place-items:center;min-height:160px;background:#efe3c8;border:2px dashed #b9a27a;border-radius:10px;padding:16px;text-align:center;color:#5b4f3f;font-weight:700}
 #chiefPic:focus-visible,.mbox:focus-visible{outline:4px solid #f3c45a;outline-offset:3px}
+.wpet{min-width:44px}.pin b{font-size:clamp(11px,1.6vw,14px)}
+.cols button{width:48px;height:48px}summary{min-height:44px}
+@media(max-width:600px){.petstage .bubble{font-size:15px!important}}
+@media(max-width:899px){.petstage{min-height:0!important}}
+body.onbreak .musicbtn{display:none}
 </style>
 </head>
 <body>
@@ -810,7 +815,7 @@ function pickVoice(){const vs=speechSynthesis.getVoices(),gb=vs.filter(v=>/en[-_
 if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
 function speak(t){if(!S.set.voice||!('speechSynthesis' in window))return;
   const clean=String(t).replace(/[\u{1F000}-\u{1FFFF}\u2600-\u27BF\uFE0F\u200D]/gu,'').replace(/\*/g,'').trim();if(!clean)return;
-  try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(clean);u.lang='en-GB';if(VOICE)u.voice=VOICE;u.rate=.95;u.pitch=.85;speechSynthesis.speak(u)}catch(e){}}
+  try{speechSynthesis.cancel();setTimeout(()=>{try{const u=new SpeechSynthesisUtterance(clean);u.lang='en-GB';if(VOICE)u.voice=VOICE;u.rate=.95;u.pitch=.85;speechSynthesis.speak(u)}catch(e){}},60)}catch(e){}}
 // ---- saving: small data in localStorage, pictures and drawing replays in IndexedDB
 const IDB={db:null,ok:false,ready:false,have:new Set(),mem:new Map(),key:new Map(),pending:new Set()};
 function hashStr(t){let h1=0xdeadbeef,h2=0x41c6ce57;for(let i=0;i<t.length;i++){const c=t.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677)}
@@ -834,7 +839,7 @@ function idbInit(){return new Promise(res=>{let done=false;const fin=()=>{if(don
   try{const rq=indexedDB.open('panda-poke-pictures',1);rq.onupgradeneeded=()=>rq.result.createObjectStore('img');rq.onerror=fin;
     rq.onsuccess=()=>{IDB.db=rq.result;try{const tx=IDB.db.transaction('img'),st=tx.objectStore('img'),kr=st.getAllKeys(),vr=st.getAll();
       tx.oncomplete=()=>{kr.result.forEach((k,i)=>{IDB.mem.set(k,vr.result[i]);IDB.have.add(k)});IDB.ok=true;fin();setTimeout(idbGC,8000)};tx.onerror=fin}catch(e){fin()}}}catch(e){fin()}})}
-function idbGC(){if(!IDB.ok||!save()||!lastRefs)return;const dead=[...IDB.have].filter(id=>!lastRefs.has(id)&&!IDB.pending.has(id));if(!dead.length)return;
+function idbGC(){if(!IDB.ok||!save()||!lastRefs)return;let snap='';try{snap=localStorage.getItem(KEY+'-prev')||''}catch(e){}const dead=[...IDB.have].filter(id=>!lastRefs.has(id)&&!IDB.pending.has(id)&&!snap.includes(id));if(!dead.length)return;
   try{const tx=IDB.db.transaction('img','readwrite'),st=tx.objectStore('img');dead.forEach(id=>{st.delete(id);IDB.have.delete(id);IDB.mem.delete(id)})}catch(e){}}
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -880,7 +885,7 @@ const CAPS=["Just found out it's bath day.",'Has zero regrets.','Thinks the zook
  'Napping in a tree. Do not disturb.','Black, white and adorable all over.'];
 const cap=()=>CAPS[Math.floor(Math.random()*CAPS.length)];
 const isVid=u=>/\.(mp4|webm)$/i.test(u);
-const j=async u=>{const r=await fetch(u);if(!r.ok)throw new Error(r.status);return r.json()};
+const j=async u=>{const ac=window.AbortController?new AbortController():null,tm=ac?setTimeout(()=>ac.abort(),9000):0;let r;try{r=await fetch(u,ac?{signal:ac.signal}:{})}finally{clearTimeout(tm)}if(!r.ok)throw new Error(r.status);return r.json()};
 // photos come from Wikimedia Commons (free to use with credit)
 const WM='https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=40'+
   '&prop=imageinfo&iiprop=url|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=960&gsrsearch=';
@@ -992,6 +997,7 @@ function render0(){
   }else{
     let lead;
     if(!S.set.feeds)lead='<div class="msg"><b>Photo feeds are switched off</b> by a grown-up. Enjoy the funny pages, puzzles and your panda!</div>';
+    else if(!all.length&&newsLoading)lead='<div class="msg">📰 Hot off the press… fetching today\'s pandas! The comics and puzzles are ready below.</div>';
     else if(!all.length)lead='<div class="msg"><b>Delivery delayed!</b> The paper pandas are napping 💤<br>Check the internet connection.<br><button id="retry">Try again</button></div>';
     else lead=card(all[0],true)+tvHTML()+(all.length>1?`<h2 class="sec">More Panda News</h2><div class="news">${all.slice(1).map(it=>card(it)).join('')}</div>`:'')+
       (S.bonus.length?`<h2 class="sec">Extra! Extra! Bonus Pandas</h2><div class="news">${S.bonus.map(it=>card(it)).join('')}</div>`:'');
@@ -1037,17 +1043,17 @@ function memory(box,L,stat,finish){
   const ALL=['🐼','🎋','🐻','🐨','🦝','🍃','🎍','🐻‍❄️','🌸','🍎','🥟','🏔️'];
   const P=ALL.slice(0,L.pairs),rows=P.length*2/L.cols;
   const deck=shuffle([...P,...P]);let open=[],done=0,moves=0,lock=false,t;
-  box.innerHTML=`<div class="mem" style="grid-template-columns:repeat(${L.cols},minmax(0,1fr));--ar:${L.cols/rows}">${deck.map((e,i)=>`<button data-i="${i}" aria-label="Card ${i+1}"></button>`).join('')}</div>
+  box.innerHTML=`<div class="mem" style="grid-template-columns:repeat(${L.cols},minmax(0,1fr));--ar:${L.cols/rows}">${deck.map((e,i)=>`<button data-i="${i}" aria-label="Card ${i+1}, face down"></button>`).join('')}</div>
     <p class="big">Find all ${L.pairs} pairs${L.max?` in ${L.max} moves or fewer`:''}!</p>`;
   const bs=[...box.querySelectorAll('.mem button')];
   const st=()=>stat(L.max?`Moves ${moves}/${L.max}`:`Moves ${moves}`);st();
   bs.forEach(b=>b.onclick=()=>{
     const i=+b.dataset.i;if(lock||b.classList.contains('up'))return;
-    b.classList.add('up');b.textContent=deck[i];open.push(i);
+    b.classList.add('up');b.textContent=deck[i];b.setAttribute('aria-label',`Card ${i+1}: ${deck[i]}`);open.push(i);
     if(open.length<2)return;
     moves++;st();const[a,c]=open;open=[];
     if(deck[a]===deck[c]){if(++done===P.length)finish(!L.max||moves<=L.max,`You found every pair in ${moves} moves.`+(L.max&&moves>L.max?` Try to do it in ${L.max} or fewer!`:''))}
-    else{lock=true;t=setTimeout(()=>{[a,c].forEach(k=>{bs[k].classList.remove('up');bs[k].textContent=''});lock=false},800)}
+    else{lock=true;t=setTimeout(()=>{[a,c].forEach(k=>{bs[k].classList.remove('up');bs[k].textContent='';bs[k].setAttribute('aria-label',`Card ${k+1}, face down`)});lock=false},800)}
   });
   return()=>clearTimeout(t);
 }
@@ -1247,7 +1253,7 @@ function maze(box,L,stat,finish){
   const key=e=>{const d={ArrowUp:'t',ArrowDown:'b',ArrowLeft:'l',ArrowRight:'r'}[e.key];if(d){e.preventDefault();go(d)}};
   addEventListener('keydown',key);
   let sx,sy;
-  cv.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY});
+  cv.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;try{cv.setPointerCapture(e.pointerId)}catch(x){}});
   cv.addEventListener('pointerup',e=>{let dx=e.clientX-sx,dy=e.clientY-sy;
     if(Math.hypot(dx,dy)<30){const r=cv.getBoundingClientRect(),cs=S2/n;dx=e.clientX-r.left-(pos%n+.5)*cs;dy=e.clientY-r.top-((pos/n|0)+.5)*cs;if(Math.hypot(dx,dy)<cs*.4)return}
     go(Math.abs(dx)>Math.abs(dy)?(dx>0?'r':'l'):(dy>0?'b':'t'))});
@@ -1820,7 +1826,7 @@ function setupBackup(){const q=id=>document.getElementById(id),msg=t=>q('bkMsg')
     q('pconf').innerHTML=`<div class="confirm"><p><b>Restore this backup?</b> It replaces everything currently on this device${d.pets&&d.pets.length?` (backup has: ${d.pets.map(p=>esc(p.name)).join(', ')})`:''}.</p>
       <div class="rbtns left"><button id="ryes" class="danger">Yes, restore it</button><button id="rno">Cancel</button></div></div>`;
     q('rno').onclick=()=>q('pconf').innerHTML='';
-    q('ryes').onclick=async()=>{msg('Restoring…');const old=S;S=d;S.set=Object.assign({},old.set,d.set||{});
+    q('ryes').onclick=async()=>{msg('Restoring…');try{const cur=localStorage.getItem(KEY);if(cur)localStorage.setItem(KEY+'-prev',cur)}catch(e){}const old=S;S=d;S.set=Object.assign({},old.set,d.set||{});
       if(IDB.ok){const strs=[];JSON.stringify(S,(k,v)=>{if(typeof v==='string'&&v.length>1500&&v.startsWith('data:'))strs.push(v);return v});
         await Promise.all(strs.map(t=>{const id='i'+hashStr(t)+t.length.toString(36);IDB.key.set(t,id);return idbPut(id,t).then(()=>{IDB.have.add(id);IDB.mem.set(id,t)}).catch(()=>{})}))}
       if(!save()){S=old;save();msg('Could not restore: storage is full or blocked.');return}location.reload()}};
@@ -1839,9 +1845,10 @@ function setupBackup(){const q=id=>document.getElementById(id),msg=t=>q('bkMsg')
 }
 
 // ---- Chief reads today's paper aloud
-function speakAll(list){if(!S.set.voice||!('speechSynthesis' in window)){toast("Chief's voice is switched off. A grown-up can turn it on in the Parent corner.");return}
-  try{speechSynthesis.cancel();list.filter(Boolean).forEach(t=>{const c=String(t).replace(/[\u{1F000}-\u{1FFFF}\u2600-\u27BF\uFE0F\u200D]/gu,'').replace(/\*/g,'').trim();if(!c)return;
-    const u=new SpeechSynthesisUtterance(c);u.lang='en-GB';if(VOICE)u.voice=VOICE;u.rate=.95;u.pitch=.85;speechSynthesis.speak(u)})}catch(e){}}
+function speakAll(list,done){if(!S.set.voice||!('speechSynthesis' in window)){toast("Chief's voice is switched off. A grown-up can turn it on in the Parent corner.");return}
+  try{speechSynthesis.cancel();setTimeout(()=>{try{const us=list.filter(Boolean).map(t=>String(t).replace(/[\u{1F000}-\u{1FFFF}\u2600-\u27BF\uFE0F\u200D]/gu,'').replace(/\*/g,'').trim()).filter(Boolean).map(c=>{
+    const u=new SpeechSynthesisUtterance(c);u.lang='en-GB';if(VOICE)u.voice=VOICE;u.rate=.95;u.pitch=.85;return u});
+    if(done&&us.length){const z=us[us.length-1];z.onend=done;z.onerror=done}us.forEach(u=>speechSynthesis.speak(u))}catch(e){}},60)}catch(e){}}
 function readPaper(btn){
   if('speechSynthesis' in window&&speechSynthesis.speaking){speechSynthesis.cancel();if(btn)btn.textContent="🔊 Chief, read me today's paper!";return}
   const h=new Date().getHours(),tod=h<12?'morning':h<17?'afternoon':'evening',[title,panels]=comicOfDay(),jk=daily(JOKES,1);
@@ -1852,7 +1859,7 @@ function readPaper(btn){
     S.set.feeds&&all.length?`Today's top story: ${hl(all[0])}. ${all[0].who.charAt(0).toUpperCase()+all[0].who.slice(1)} ${all[0].cap.charAt(0).toLowerCase()+all[0].cap.slice(1)}`:'',
     `Did you know? ${document.getElementById('fact').textContent}`,`The weather report says: ${document.getElementById('weather').textContent}.`,
     `Now, the joke of the day. ${jk[0]}`,jk[1],`In the funny pages: ${title}. ${panels.map(x=>x[0]).join(' ')}`,
-    S.pets.length?`And a special hello to ${S.pets.map(p=>p.name).join(' and ')}!`:'',"That's all the news for today. Cheerio!"]);
+    S.pets.length?`And a special hello to ${S.pets.map(p=>p.name).join(' and ')}!`:'',"That's all the news for today. Cheerio!"],()=>{const b=document.getElementById('readPaper');if(b)b.textContent="🔊 Chief, read me today's paper!"});
   if(btn&&S.set.voice)btn.textContent='⏹ Stop reading';
 }
 
@@ -2054,18 +2061,19 @@ function parentPage(){
     <label>Extra Panda TV clips<textarea id="pytx" rows="3" placeholder="Paste YouTube links here, one per line">${esc((S.set.ytExtra||[]).map(i=>'https://youtu.be/'+i).join('\n'))}</textarea>
       <small>${(S.set.ytExtra||[]).length} extra clip${(S.set.ytExtra||[]).length===1?'':'s'} saved. They join the daily rotation.</small></label>
     <label class="chk"><input type="checkbox" id="pmic"${S.set.mic?' checked':''}><span>Let Rishi talk to Chief with the microphone</span>
-      <small>Off by default. When on, the browser's speech recognition listens only while the 🎤 button is pressed. On some devices (like Safari on iPad) the sound is sent to the device maker to turn it into words.</small></label>
+      <small>Off by default. When on, the browser's speech recognition listens only while the 🎤 button is pressed. On many devices the sound is sent to Apple or Google to be turned into words.</small></label>
     <label>Extra countdowns<textarea id="pcds" rows="3" placeholder="One per line: 2026-12-19 🏝️ Beach trip">${esc((S.set.cds||[]).map(c=>c.date+' '+c.icon+' '+c.t).join('\n'))}</textarea>
       <small>Type a date (year-month-day), an emoji and a name. They show on the front page and disappear after the day. These stay on this device only. Christmas is built in.</small></label>
     <label class="chk"><input type="checkbox" id="pfd"${S.set.feeds?' checked':''}><span>Show photos and videos from the internet feeds</span>
-      <small>Turn off to hide the automatic panda photo feeds (from Wikimedia Commons). Games, puzzles, pets and the funny pages still work.</small></label>
+      <small>Turn off to hide the automatic panda photo feeds (from Wikimedia Commons) and Panda TV. It also switches YouTube music back to the built-in tunes. Pictures already saved in the Scrapbook still load from Wikimedia. Games, puzzles, pets and the funny pages still work.</small></label>
   </div>
   <p class="pstats">Treats: ${S.treats} · Stickers: ${STK.filter(s=>S.stk[s[0]]).length}/${STK.length} · Pets: ${S.pets.length?S.pets.map(p=>esc(p.name)).join(', '):'none adopted yet'} · Letters sent: ${S.letters.length}</p>
-  ${backupHTML()}<h3 class="psec">Other</h3>
+  ${backupHTML()}${(()=>{try{return localStorage.getItem(KEY+'-prev')?'<div class="rbtns left"><button id="pundo">↩️ Undo the last restore</button></div>':''}catch(e){return''}})()}<h3 class="psec">Other</h3>
   <div class="rbtns left"><button id="ptreat">Give Rishi 5 treats</button><button id="preset" class="danger">Reset all progress…</button></div><div id="pconf"></div></div>`;
   const q=id=>document.getElementById(id);
   const setB=()=>{S.set.bday=q('pbm').value&&q('pbd').value?q('pbm').value+'-'+q('pbd').value:'';S.bdaySetByParent=true;save();bdayBox()};
   q('pbm').onchange=setB;q('pbd').onchange=setB;
+  if(q('pundo'))q('pundo').onclick=()=>{try{const p=localStorage.getItem(KEY+'-prev');if(p){localStorage.setItem(KEY,p);localStorage.removeItem(KEY+'-prev');location.reload()}}catch(e){toast('Could not undo, sorry.')}};
   q('pmic').onchange=()=>{S.set.mic=q('pmic').checked;save()};
   q('pcds').onchange=()=>{S.set.cds=q('pcds').value.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{const m=/^(\d{4}-\d{2}-\d{2})\s+(\S+)?\s*(.*)$/.exec(l);if(!m||isNaN(new Date(m[1]+'T12:00')))return null;
       const ic=m[2]&&!/^[\w]/.test(m[2])?m[2]:'⭐',t=(ic===m[2]?m[3]:((m[2]||'')+' '+m[3])).replace(/[<>&"']/g,'').trim().slice(0,40)||'Something special';return{date:m[1],icon:ic.slice(0,8),t,from:today}}).filter(Boolean).slice(0,6);
@@ -2091,7 +2099,7 @@ function parentPage(){
   q('pytx').onchange=()=>{S.set.ytExtra=[...new Set([...q('pytx').value.matchAll(YTID)].map(m=>m[1]))];save();toast(`📺 ${S.set.ytExtra.length} extra Panda TV clip${S.set.ytExtra.length===1?'':'s'} saved`);setTimeout(parentPage,0)};
   q('pfd').onchange=()=>{S.set.feeds=q('pfd').checked;save();if(S.set.feeds&&!all.length)start(true).then(()=>{view='parent';render()})};
   q('ptreat').onclick=()=>{S.treats+=5;save();toast('🎋 +5 treats from a grown-up!');parentPage()};
-  q('preset').onclick=()=>{q('pconf').innerHTML=`<div class="confirm"><p><b>Are you sure?</b> This clears Rishi's levels, stickers, pets, scrapbook, letters and settings on this iPad.</p>
+  q('preset').onclick=()=>{q('pconf').innerHTML=`<div class="confirm"><p><b>Are you sure?</b> This clears Rishi's levels, stickers, pets, scrapbook, letters and settings on this device.</p>
     <div class="rbtns left"><button id="pyes" class="danger">Yes, reset everything</button><button id="pno">Cancel</button></div></div>`;
     q('pno').onclick=()=>q('pconf').innerHTML='';q('pyes').onclick=()=>{try{localStorage.removeItem(KEY)}catch(e){}location.reload()}};
   setupBackup();
@@ -2099,14 +2107,18 @@ function parentPage(){
 }
 document.getElementById('parentBtn').onclick=()=>gate(()=>{endGame();view='parent';render();scrollTo({top:0})});
 let onBreak=false;
-function checkLimit(){if(!S.set.limit||onBreak||S.time.s<(S.set.limit+S.time.extra)*60)return;onBreak=true;endGame();
+function breakLock(on){['main','nav','.side','.mast','#musicBtn'].forEach(sel=>{const el=document.querySelector(sel);if(!el)return;if(on){el.setAttribute('inert','');el.setAttribute('aria-hidden','true')}else{el.removeAttribute('inert');el.removeAttribute('aria-hidden')}});
+  document.body.classList.toggle('onbreak',on);if(on){S.musicMuted=true;try{musicSync()}catch(e){}try{speechSynthesis.cancel()}catch(e){}}}
+function checkLimit(){if(!S.set.limit||onBreak||S.time.s<(S.set.limit+S.time.extra)*60)return;onBreak=true;endGame();breakLock(true);
   const show=()=>{modal(`<div class="medal">😴</div><h3>Time for a break, Rishi!</h3><p>Chief Bamboozle is taking a nap now. Come back tomorrow for a brand new paper!</p>
     <div class="rbtns"><button id="bmore">Grown-up: add 15 minutes</button></div>`);
-    document.getElementById('bmore').onclick=()=>gate(()=>{S.time.extra+=15;save();onBreak=false;closeModal()},show)};
+    document.getElementById('bmore').onclick=()=>gate(()=>{S.time.extra+=15;save();onBreak=false;breakLock(false);closeModal()},show)};
   show()}
 setInterval(()=>{if(document.visibilityState!=='visible')return;
   if(S.time.d!==day(new Date())){if((typeof A!=='undefined'&&A.dirty)||view==='art'||!modalEl.hidden||stopGame)return;location.reload();return}
-  S.time.s+=10;save();checkLimit()},10000);
+  S.time.s+=10;if(S.time.s%60===0)save();checkLimit()},10000);
+addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')save()});
+addEventListener('pagehide',()=>save());
 checkLimit();
 
 
@@ -2619,7 +2631,7 @@ async function artOpen(o){cancelAnimationFrame(guideAnim);const prev=A;
   else A.title='Free drawing';
   studioUI();
   const spec=A.mode==='page'?{page:A.page,seed:DAYN}:A.mode==='dots'?{dots:A.dots,done:false}:A.mode==='wear'?{wear:A.wear}:null;
-  LMASK=await buildLines(ctxL,spec);if(A.mode==='dots')LMASK=null;drawGuides()}
+  const me=A;LMASK=null;A.loading=!!spec;const m=await buildLines(ctxL,spec);if(A!==me)return;A.loading=false;LMASK=A.mode==='dots'?null:m;drawGuides()}
 function studioUI(){const free=A.mode==='free'||A.mode==='lesson',stamps=[...EMOJI_STAMPS,...[...new Set(S.pets.map(p=>p.coat))].map(c=>'pet:'+c)];
   main.innerHTML=`<div class="studio"><div class="shead">${artBack()}<h2>${esc(A.title)}</h2><div class="sacts"><button id="aUndo">↩️ Undo</button><button id="aClear">🗑️ Clear</button>
       ${A.mode==='wear'?`<button id="aWear" class="go">✨ Put it on ${esc(S.pets[A.pet].name)}!</button>`:'<button id="aSave" class="go">💾 Save</button>'}</div></div>
@@ -2666,14 +2678,14 @@ function drawGuides(){cancelAnimationFrame(guideAnim);if(!ctxG)return;const g=ct
 function posOf(e){const r=cvG.getBoundingClientRect();return[(e.clientX-r.left)*AW/r.width,(e.clientY-r.top)*AH/r.height]}
 async function dotsTap(x,y){const D=DOTS.find(d=>d.id===A.dots),pts=D.pts(),[px,py]=pts[A.dotN];
   if(Math.hypot(px-x,py-y)>44){const near=pts.findIndex(([a,b])=>Math.hypot(a-x,b-y)<30);if(near>A.dotN)toast(`Oops! Find dot number ${A.dotN+1} first.`);return}
-  A.dotN++;if(A.dotN===pts.length){A.dotsDone=true;LMASK=await buildLines(ctxL,{dots:A.dots,done:true});drawGuides();A.tool='bucket';
+  A.dotN++;if(A.dotN===pts.length){A.dotsDone=true;const me=A;A.loading=true;const m=await buildLines(ctxL,{dots:A.dots,done:true});if(A!==me)return;A.loading=false;LMASK=m;drawGuides();A.tool='bucket';
     S.dotsDone=S.dotsDone||{};if(!S.dotsDone[A.dots]){S.dotsDone[A.dots]=today;S.st.dots++;S.treats+=1;toast('🔢 You found it! +1 🎋 treat')}save();
     burst(innerWidth/2,innerHeight/2,['🎉','⭐','✨']);speak(`Hooray! It's ${D.n}!`);studioRefresh()}else{drawGuides();barRow()}}
 function studioRefresh(){document.querySelectorAll('.stools [data-tool]').forEach(b=>b.classList.toggle('on',b.dataset.tool===A.tool));ctxRow();barRow()}
 function bindStudio(){const st=q2('cstack');let pid=null;
   st.onpointerdown=e=>{if(pid!==null)return;e.preventDefault();A.dirty=true;const[x,y]=posOf(e);
     if(A.mode==='dots'&&!A.dotsDone){dotsTap(x,y);return}
-    if(A.tool==='bucket'){const a={t:'f',x:x|0,y:y|0,c:A.col,f:A.fill,r:rnd(1e9)};if(floodFill(ctxD,a,LMASK))A.acts.push(a);return}
+    if(A.tool==='bucket'){if(A.loading){toast('🖍️ One moment, the page is still getting ready…');return}const a={t:'f',x:x|0,y:y|0,c:A.col,f:A.fill,r:rnd(1e9)};if(floodFill(ctxD,a,LMASK))A.acts.push(a);return}
     if(A.tool==='stamp'){const a={t:'p',k:A.stamp,x:x|0,y:y|0,s:A.size,m:A.sym};drawStamp(ctxD,a);A.acts.push(a);return}
     pid=e.pointerId;try{st.setPointerCapture(pid)}catch(_){}
     const a={t:'s',tool:A.tool,c:A.col,s:A.size,m:A.sym,r:rnd(1e9),p:[x|0,y|0]};A.cur=a;A.acts.push(a);segDraw(ctxD,a,0)};
@@ -2733,8 +2745,11 @@ async function replayArt(id,box){const a=S.art.find(x=>x.id===id);if(!a||!a.rep)
     if(ai<acts.length)setTimeout(step,ai&&acts[ai-1]&&acts[ai-1].t!=='s'?160:16);else{burst(innerWidth/2,innerHeight/2,['✨','🎨']);delete a._stop}};step()}
 function galleryModal(id){const a=S.art.find(x=>x.id===id);if(!a)return;
   modal(`<div class="gframe big"><img src="${a.img}" alt=""><b>${esc(a.t)}</b><small>by Rishi · ${fmt(a.d)}</small></div><p class="arev">“${esc(review(a))}”</p>
-    <div class="rbtns">${a.rep?'<button id="gmPlay">▶ Watch it again</button>':''}<button id="gmWall">🖼️ Hang in my panda's room</button><button id="gmDel">🗑️ Delete</button><button id="gmX" class="go">Close</button></div>`);
+    <div class="rbtns">${a.rep?'<button id="gmPlay">▶ Watch it again</button>':''}<button id="gmWall">🖼️ Hang in my panda's room</button><button id="gmShare">📤 Save or share</button><button id="gmDel">🗑️ Delete</button><button id="gmX" class="go">Close</button></div>`);
   if(q2('gmPlay'))q2('gmPlay').onclick=()=>replayArt(id);
+  q2('gmShare').onclick=async()=>{try{const bl=await (await fetch(a.img)).blob(),nm=(a.t||'panda-art').replace(/[^\w ]+/g,'').trim().replace(/\s+/g,'-')+'.'+(bl.type.split('/')[1]||'png'),fl=new File([bl],nm,{type:bl.type});
+      if(navigator.canShare&&navigator.canShare({files:[fl]})){await navigator.share({files:[fl],title:a.t});return}
+      const u=URL.createObjectURL(bl),l=document.createElement('a');l.href=u;l.download=nm;document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);toast('📥 Picture saved to Downloads')}catch(e){if(e&&e.name!=='AbortError')toast('Could not share the picture here.')}};
   q2('gmWall').onclick=()=>{S.artWall=id;save();closeModal();toast("🖼️ It's hanging on the wall in your panda's room!")};
   q2('gmDel').onclick=e=>{if(e.target.dataset.sure){S.art=S.art.filter(x=>x.id!==id);if(S.artWall===id)S.artWall=null;save();closeModal();render()}else{e.target.dataset.sure=1;e.target.textContent='Tap again to delete'}};
   q2('gmX').onclick=closeModal}
@@ -2842,7 +2857,8 @@ const TRACKS={
       if(s===0)tone(t,NOTE('D2'),spb*8,{type:'sine',v:.12,a:.01,r:1.2})}}};
 const VIEW_TRACK={games:'game',art:'art',world:'lantern',school:'game',story:'art',spring:'art'};
 const ytOK=()=>/^https?:$/.test(location.protocol)&&!!ytParse(S.set.ytMusic);
-function musicMode(){return S.set.music==='yt'&&!ytOK()?'tunes':S.set.music}
+let tapped=false;addEventListener('pointerdown',()=>{if(tapped)return;tapped=true;try{musicSync()}catch(e){}},{capture:true});
+function musicMode(){return S.set.music==='yt'&&(!ytOK()||!S.set.feeds)?'tunes':S.set.music}
 function wantedTrack(){if(musicMode()!=='tunes'||S.musicMuted||document.hidden)return null;
   return VIEW_TRACK[view]||(S.set.musicWhere==='all'?'lantern':null)}
 function musicTick(){const ac=MUS.ac,T=TRACKS[MUS.track];if(!ac||!T)return;const spb=60/T.bpm/2;
@@ -2850,7 +2866,7 @@ function musicTick(){const ac=MUS.ac,T=TRACKS[MUS.track];if(!ac||!T)return;const
   const speaking='speechSynthesis' in window&&speechSynthesis.speaking,vol=(S.set.musicVol||.5)*(speaking?.3:1);MUS.out.gain.setTargetAtTime(vol,ac.currentTime,.3)}
 function musicSync(){const want=wantedTrack();
   if(!want){if(MUS.timer){clearInterval(MUS.timer);MUS.timer=null;if(MUS.ac)MUS.out.gain.setTargetAtTime(0,MUS.ac.currentTime,.15)}MUS.track=null}
-  else if(MUS.track!==want||!MUS.timer){const ac=mAC();if(!ac)return;MUS.track=want;MUS.step=0;MUS.next=ac.currentTime+.08;if(!MUS.timer)MUS.timer=setInterval(musicTick,25)}
+  else if(tapped&&(MUS.track!==want||!MUS.timer)){const ac=mAC();if(!ac)return;MUS.track=want;MUS.step=0;MUS.next=ac.currentTime+.08;if(!MUS.timer)MUS.timer=setInterval(musicTick,25)}
   ytSync();musicBtn()}
 // ---- YouTube playlist mode (set up in the Parent corner)
 function ytParse(u){u=String(u||'');const l=/[?&]list=([\w-]+)/.exec(u),v=/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/)([\w-]{11})/.exec(u);return l?{list:l[1]}:v?{v:v[1]}:null}
@@ -3362,11 +3378,12 @@ function dailyGreeting(){const g=S.greet,now=Date.now();if(now-(g.lastAt||0)<3*3
 
 if(S.me||S.meAsked!==today)dailyGreeting();
 if(backupDue()&&S.bkNag!==today&&(!S.bkNagAt||(new Date(today)-new Date(S.bkNagAt))/864e5>=7)){S.bkNag=today;S.bkNagAt=today;save();setTimeout(()=>toast('👋 Grown-ups: time for a backup! Open the Parent corner and tap <b>Save backup file</b>.'),9000)}
+let newsLoading=false;
 async function start(force){
   if(!S.set.feeds){all=[];if(view==='today')render();return}
   if(!force&&S.day===today&&S.items&&S.items.length){all=S.items;if(view==='today')render();return}
-  if(view==='today')main.innerHTML='<div class="msg">Hot off the press… fetching today\'s pandas!</div>';
-  try{all=await buildToday()}catch(e){all=[]}
+  newsLoading=true;if(view==='today')try{render()}catch(e){}
+  try{all=await buildToday()}catch(e){all=[]}newsLoading=false;
   if(all.length){S.day=today;S.items=all;save()}else if(S.items&&S.items.length)all=S.items;
   if(view==='today')render();
 }
