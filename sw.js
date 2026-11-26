@@ -1,7 +1,7 @@
 // Rishi's Panda Poke: keeps the app working offline.
-const CACHE = 'panda-poke-app-v1';
+const CACHE = 'panda-poke-app-v2';
 const PHOTOS = 'panda-poke-photos-v1';
-const CORE = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
+const CORE = ["./", "./index.html", "./manifest.json", "./icons/icon-180.png", "./icons/icon-192.png", "./icons/icon-32.png", "./icons/icon-512.png", "./icons/icon-96.png", "./icons/maskable-512.png", "./images/bebe.webp", "./images/chief-desk.jpg", "./images/chief.webp", "./images/forest.jpg", "./images/lineart-happy.png", "./images/lineart-mega.png", "./images/lineart-princess.png", "./images/lineart-sad.png", "./images/panda-bamboo.webp", "./images/panda-boba.webp", "./images/panda-happy.webp", "./images/panda-icecream.webp", "./images/panda-matcha.webp", "./images/panda-mega.webp", "./images/panda-pocky.webp", "./images/panda-princess.webp", "./images/panda-ramen.webp", "./images/panda-sad.webp", "./images/sprite-happy.png", "./images/sprite-mega.png", "./images/sprite-princess.png", "./images/sprite-sad.png", "./images/world-artist.webp", "./images/world-camp.webp", "./images/world-chef.webp", "./images/world-explorer.webp", "./images/world-fisher.webp", "./images/world-gamer.webp", "./images/world-hiker.webp", "./images/world-map.jpg", "./images/world-reader.webp", "./images/world-snow.webp", "./images/world-spring.webp", "./images/world-swim.webp"];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
@@ -20,6 +20,14 @@ self.addEventListener('fetch', e => {
   if (r.method !== 'GET') return;
   const u = new URL(r.url);
   // The app itself: try the internet first (so updates arrive), fall back to the saved copy offline.
+  // Pictures and icons never change name, so the saved copy is used first.
+  if (u.origin === location.origin && /\/(images|icons)\//.test(u.pathname)) {
+    e.respondWith(caches.match(r).then(m => m || fetch(r).then(res => {
+      if (res.ok) { const cp = res.clone(); caches.open(CACHE).then(c => c.put(r, cp)); }
+      return res;
+    })));
+    return;
+  }
   if (u.origin === location.origin) {
     e.respondWith(fetch(r).then(res => {
       if (res.ok) { const cp = res.clone(); caches.open(CACHE).then(c => c.put(r, cp)); }
