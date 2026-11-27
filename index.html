@@ -679,6 +679,42 @@ a.tile.rbx{text-decoration:none;color:var(--ink);display:flex;border:2px solid v
 @media(max-width:600px){.petstage .bubble{font-size:15px!important}}
 @media(max-width:899px){.petstage{min-height:0!important}}
 body.onbreak .musicbtn{display:none}
+.missions{margin:0 0 22px}.missions ul{list-style:none;margin:0;padding:0}
+.missions li{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px dashed var(--muted);font-size:18px}
+.missions li .mt{flex:1}.missions li.done .mt{text-decoration:line-through;color:var(--muted)}.mchk{font-size:22px}
+.missions li button{min-height:40px;padding:0 16px}
+.wslots{display:flex;justify-content:center;gap:6px}.wslot{display:flex;flex-direction:column;align-items:center;width:44px}
+.wslot i{font-style:normal;width:38px;height:38px;border-radius:50%;border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:19px;background:#fffaf0}
+.wslot.got i{background:#f6e3a1}.wslot.now i{box-shadow:0 0 0 3px var(--accent)}.wslot.sun i{border-radius:8px;background:#f3d6c8}.wslot small{font-weight:700;font-size:12px;margin-top:2px}
+.chestbtn{background:none;border:none;box-shadow:none;padding:0;min-height:0;display:block;margin:6px auto;width:210px;cursor:pointer}
+.chest{width:100%;display:block}.chest .lid{transform-origin:30px 80px;transition:transform .6s cubic-bezier(.3,1.6,.6,1)}.chest .cglow{opacity:0;transition:opacity .6s}
+.chestbtn:not(.open) .chest{animation:wob 1.4s ease-in-out infinite}@keyframes wob{0%,100%{transform:rotate(0)}10%{transform:rotate(-4deg)}20%{transform:rotate(4deg)}30%{transform:rotate(0)}}
+.chestbtn.open .lid{transform:rotate(-38deg) translateY(-6px)}.chestbtn.open .cglow{opacity:1}
+.loot{list-style:none;padding:0;margin:8px 0;font-size:19px}.loot li{padding:6px 0}
+.scoop{border:3px double var(--ink);background:#fffaf0;margin-bottom:22px;padding:18px 20px}.scoop .hl{font-size:clamp(30px,5vw,46px);text-align:center;margin:6px 0}
+.scoopimg img{display:block;width:100%;max-height:440px;object-fit:contain;background:#fff;border:2px solid var(--ink)}
+.scooptext{font-size:20px;line-height:1.55;margin-top:12px;max-width:760px}.scooptext p{margin:0 0 10px}
+.scooptext p:first-child:first-letter{float:left;font-family:'Playfair Display',Georgia,serif;font-weight:900;font-size:56px;line-height:.85;margin:4px 8px 0 0}
+.serialbox .q,.repbox .q{font-family:'Playfair Display',Georgia,serif;font-weight:900;font-size:22px;margin:4px 0}
+.reporter .repdesk{max-width:820px;margin:0 auto}.rl{display:block;margin:12px 0 4px}.rl>span{display:block;font-weight:900;font-size:19px;margin-bottom:6px}
+.rl input,.rl textarea{width:100%;font:inherit;font-size:20px;border:2px solid var(--ink);padding:10px;background:#fffaf0}.rl textarea{min-height:180px;line-height:1.5}
+.ideas{margin:6px 0 0}.ideas button{min-height:38px;padding:0 14px;font-size:15px}
+.rpics{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 10px}.rpics button{width:104px;height:84px;padding:3px;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:26px}
+.rpics button img{width:100%;height:100%;object-fit:cover;background:#fff}.rpics button small{font-size:12px}.rpics button.on{outline:4px solid var(--accent);outline-offset:1px}
+.mystories{display:grid;gap:12px;max-width:820px;margin:0 auto}.mystories summary{cursor:pointer;display:flex;flex-direction:column;gap:2px;font-size:19px}
+.mystories summary small{color:var(--muted);font-size:14px}.mystories img{max-width:100%;max-height:300px;display:block;margin:10px 0;border:2px solid var(--ink)}
+.fboard{background:#1f2a33;color:#f3d36b;border:4px solid #1f1a14;border-radius:12px;padding:10px 12px;font-family:'Courier New',monospace;box-shadow:4px 4px 0 #1f1a14}
+.fhead{display:flex;align-items:center;gap:12px;border-bottom:2px solid #f3d36b;padding-bottom:6px;margin-bottom:6px}.fhead img{width:90px;height:auto}.fhead b{font-size:28px;letter-spacing:4px}
+.frow{display:grid;grid-template-columns:40px 1fr 90px 110px;align-items:center;gap:8px;padding:8px 0;border-bottom:1px dashed #5a6a76;font-size:19px}.frow>span:first-child{font-size:26px}
+.frow.fh{font-size:13px;color:#9fb0bd;padding:2px 0}.fst{font-weight:900;font-size:24px;text-align:right}.fst.soon{color:#ff9f43}.fst.now{color:#7bed9f;animation:hpulse 1s infinite}
+.packbox{margin-top:18px}.packbox h3 small{font-size:15px;font-weight:400;font-style:italic}.pack{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.pack button{display:flex;align-items:center;gap:8px;font-size:17px;min-height:56px;text-align:left}.pack button span{font-size:26px}.pack button.on{background:#e1efdc}
+.cavebox{text-align:center;background:linear-gradient(#2c2340,#4a3a6a);color:#f5ecff}.cavebox .how{color:#d8c8ef}.cimg{width:160px;height:auto}
+.rarelist{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:12px 0}.rare{background:rgba(255,255,255,.08);border:2px dashed #9a84c8;border-radius:10px;padding:8px;display:grid;justify-items:center}
+.rare span{font-size:34px}.rare b{font-size:15px}.rare small{font-size:12px;opacity:.8}.rare.got{border:2px solid #f6d13a;background:rgba(246,209,58,.15)}
+@media(max-width:600px){.frow{grid-template-columns:30px 1fr 70px 80px;font-size:15px}.fst{font-size:18px}.wtop{grid-template-columns:1fr}}
+.cimg{font-size:96px;line-height:1.1;width:auto}.fic{font-size:44px}.chiefnote span{font-style:italic}
+@media(max-width:600px){.rarelist{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -995,6 +1031,8 @@ function render0(){
   if(view==='story'){storyPage();return}
   if(view==='chat'){chatPage();return}
   if(view==='spring'){springPage();return}
+  if(view==='ship'){shipPage();return}if(view==='cable'){cablePage();return}if(view==='reporter'){reporterPage();return}
+  if(view==='missions'){main.innerHTML=backW+'<h2 class="sec">The Panda Temple</h2><p class="lede">Chief pins three missions on the temple bell every morning. Finish them all to earn a key!</p>'+missionsHTML()+repBoxHTML();bindBackW();return}
   if(view==='parent'){parentPage();return}
   const left=S.set.bonus-S.bonus.length;bonusBtn.disabled=left<=0;
   bonusBtn.textContent=left>0?`Extra! Bonus panda (${left} left)`:'No more extras today';
@@ -1009,7 +1047,8 @@ function render0(){
     else lead=card(all[0],true)+tvHTML()+(all.length>1?`<h2 class="sec">More Panda News</h2><div class="news">${all.slice(1).map(it=>card(it)).join('')}</div>`:'')+
       (S.bonus.length?`<h2 class="sec">Extra! Extra! Bonus Pandas</h2><div class="news">${S.bonus.map(it=>card(it)).join('')}</div>`:'');
     let extras='';try{extras=funnyPages()+artPageHTML()+diaryHTML()+lettersHTML()}catch(e){window.__showErr&&window.__showErr('front page: '+e.message)}
-    main.innerHTML=`<div class="readbar"><button id="readPaper" class="sayit">🔊 Chief, read me today's paper!</button><button id="aboutBtn" class="sayit">✏️ All about me</button></div>`+lead+extras;
+    let top='';try{top=missionsHTML()+scoopHTML()}catch(e){window.__showErr&&window.__showErr('missions: '+e.message)}
+    main.innerHTML=`<div class="readbar"><button id="readPaper" class="sayit">🔊 Chief, read me today's paper!</button><button id="aboutBtn" class="sayit">✏️ All about me</button></div>`+top+lead+repBoxHTML()+extras;
     try{setupLetters()}catch(e){window.__showErr&&window.__showErr('letters: '+e.message)}
   }
   const nap=el=>{const d=document.createElement('div');d.className='mnap';d.textContent='🐼💤 This picture is napping. Try again later!';el.replaceWith(d)};
@@ -1022,7 +1061,7 @@ main.addEventListener('click',e=>{
   if(b.id==='retry'){start(true);return}
   if(b.dataset.game){openGame(b.dataset.game);return}
   if(b.id==='gback'){endGame();gamesMenu();return}
-  if(b.classList.contains('reveal')){const w=b.parentElement;w.classList.add('open');speak(w.querySelector('.q').textContent+' … '+w.querySelector('.a').textContent);return}
+  if(b.classList.contains('reveal')){const w=b.parentElement;w.classList.add('open');mission('joke');speak(w.querySelector('.q').textContent+' … '+w.querySelector('.a').textContent);return}
   if(b.dataset.say){speak(b.dataset.say);return}
   if(b.id==='readPaper'){readPaper(b);return}
   if(b.id==='aboutBtn'){aboutMe(false);return}
@@ -1318,7 +1357,7 @@ function play(g,n){
   endGame();const box=document.getElementById('gbox'),L=g.levels[n-1];let ended=false,ft,stop;
   const finish=(passed,msg)=>{if(ended)return;ended=true;
     let reward='';
-    if(passed){const first=n>=(S.lv[g.id]||1);S.lv[g.id]=Math.max(S.lv[g.id]||1,n+1);
+    if(passed){mission('level');const first=n>=(S.lv[g.id]||1);S.lv[g.id]=Math.max(S.lv[g.id]||1,n+1);
       petXP(5,'play');if(first){S.treats+=3;const st=awardSticker();reward='+3 🎋 treats for your panda'+(st?` · New sticker: <b>${st}</b>!`:'')}
       else{S.treats+=1;reward='+1 🎋 treat for your panda'}save()}
     ft=setTimeout(()=>{if(stop)stop();stopGame=null;
@@ -1440,6 +1479,26 @@ WEAR.feet={none:['Bare paws',''],
   boots:['Rain boots',`<rect x="109" y="256" width="36" height="30" rx="6" fill="#d93b2b"/><rect x="155" y="256" width="36" height="30" rx="6" fill="#d93b2b"/><path d="M109 282 H145 M155 282 H191" stroke="#1f1a14" stroke-width="4"/>`],
   socks:['Stripy socks',`<rect x="111" y="250" width="32" height="38" rx="14" fill="#fffaf0"/><rect x="157" y="250" width="32" height="38" rx="14" fill="#fffaf0"/><path d="M112 258 H142 M112 268 H142 M158 258 H188 M158 268 H188" stroke="#8e5cc4" stroke-width="5"/>`],
   sneakers:['Sneakers',`<path d="M106 286 C106 266 122 262 130 266 C140 270 148 276 148 286 Z" fill="#3b6fb6" ${K}/><path d="M152 286 C152 276 160 270 170 266 C178 262 194 266 194 286 Z" fill="#3b6fb6" ${K}/><path d="M106 284 H148 M152 284 H194" stroke="#fffaf0" stroke-width="4"/>`]};
+// ---- rare outfits (only from the Sunday treasure chest)
+Object.assign(WEAR.hat,{
+  royal:['✨ Royal crown',`<polygon points="100,60 102,8 124,36 150,-4 176,36 198,8 200,60" fill="#f6c945" ${K}/><rect x="98" y="52" width="104" height="12" rx="4" fill="#d8a32a" ${K}/><circle class="noink" cx="150" cy="30" r="8" fill="#d93b2b" stroke="#1f1a14" stroke-width="2"/><circle class="noink" cx="114" cy="40" r="5" fill="#3b6fb6"/><circle class="noink" cx="186" cy="40" r="5" fill="#2f6b3f"/><circle class="noink" cx="124" cy="58" r="3" fill="#fff"/><circle class="noink" cx="150" cy="58" r="3" fill="#fff"/><circle class="noink" cx="176" cy="58" r="3" fill="#fff"/>`],
+  astro:['✨ Space helmet',`<circle class="noink" cx="150" cy="118" r="96" fill="#bfe3ff" fill-opacity=".22" stroke="#e9eef5" stroke-width="9"/><circle class="noink" cx="150" cy="118" r="96" fill="none" stroke="#1f1a14" stroke-width="2.5"/><path class="noink" d="M86 70 Q100 46 128 36" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".8"/><rect x="104" y="196" width="92" height="16" rx="8" fill="#9aa0a6" ${K}/>`],
+  unicorn:['✨ Unicorn horn',`<polygon points="150,-30 136,56 164,56" fill="#f6d13a" ${K}/><path class="noink" d="M140 36 L160 30 M143 18 L157 13 M146 2 L154 -2" stroke="#f29ab8" stroke-width="4"/>${flower(118,62,'#f29ab8')}${flower(182,62,'#8e5cc4')}`]});
+Object.assign(WEAR.eyes,{
+  rainbow:['✨ Rainbow shades',[['#d93b2b',96],['#f28c28',101],['#f6d13a',106],['#8bc34a',111],['#3b6fb6',116],['#8e5cc4',121]].map(([c,y])=>`<rect class="noink" x="100" y="${y}" width="44" height="5" fill="${c}"/><rect class="noink" x="156" y="${y}" width="44" height="5" fill="${c}"/>`).join('')+`<rect x="100" y="96" width="44" height="30" rx="9" fill="none" ${K}/><rect x="156" y="96" width="44" height="30" rx="9" fill="none" ${K}/><path d="M144 104 L156 104" stroke="#1f1a14" stroke-width="4"/>`],
+  diamond:['✨ Diamond specs',`<polygon points="122,90 142,108 122,128 102,108" fill="#bfe8ff" fill-opacity=".85" ${K}/><polygon points="178,90 198,108 178,128 158,108" fill="#bfe8ff" fill-opacity=".85" ${K}/><path d="M142 106 L158 106" stroke="#1f1a14" stroke-width="4"/><path class="noink" d="M112 104 L120 98 M168 104 L176 98" stroke="#fff" stroke-width="3" stroke-linecap="round"/>`]});
+Object.assign(WEAR.neck,{
+  rainbowscarf:['✨ Rainbow scarf',`<g ${K}><path d="M96 176 Q150 204 204 176 L204 194 Q150 222 96 194 Z" fill="#8e5cc4"/><path d="M176 196 L188 248 L164 248 L160 200 Z" fill="#3b6fb6"/></g><path class="noink" d="M98 182 Q150 208 202 182" fill="none" stroke="#f6d13a" stroke-width="5"/><path class="noink" d="M98 188 Q150 214 202 188" fill="none" stroke="#d93b2b" stroke-width="4"/><path class="noink" d="M168 214 L184 214 M170 228 L186 228" stroke="#8bc34a" stroke-width="5"/>`],
+  goldbell:['✨ Golden star medal',`<path d="M132 184 L150 212 L168 184" fill="none" stroke="#a8321f" stroke-width="7"/><polygon points="${starPts(150,226,20,9)}" fill="#f6c945" ${K}/><circle class="noink" cx="150" cy="226" r="5" fill="#fff" opacity=".7"/>`]});
+Object.assign(WEAR.body,{
+  spacesuit:['✨ Space suit',TOP('#e9eef5',`<rect x="128" y="204" width="44" height="26" rx="5" fill="#9aa0a6" ${K}/><circle class="noink" cx="140" cy="217" r="4" fill="#d93b2b"/><circle class="noink" cx="152" cy="217" r="4" fill="#8bc34a"/><circle class="noink" cx="164" cy="217" r="4" fill="#3b6fb6"/><polygon class="noink" points="${starPts(116,196,8,3.5)}" fill="#f6d13a"/>`)],
+  robe:['✨ Royal robe',`<path d="M104 184 Q150 206 196 184 L196 196 Q150 220 104 196 Z" fill="#fffaf0" ${K}/>${[116,134,150,166,184].map(x=>`<circle class="noink" cx="${x}" cy="${x===150?206:200}" r="2.4" fill="#1f1a14"/>`).join('')}`,`<path d="M104 182 Q150 200 196 182 L240 290 Q150 304 60 290 Z" fill="#6a2c91" ${K}/><path class="noink" d="M62 286 Q150 300 238 286" fill="none" stroke="#f6c945" stroke-width="6"/>`]});
+Object.assign(WEAR.feet,{
+  rocket:['✨ Rocket boots',`<path d="M118 290 L126 304 L134 290 Z M166 290 L174 304 L182 290 Z" fill="#f28c28"/><rect x="109" y="254" width="36" height="34" rx="8" fill="#c0c7d1" ${K}/><rect x="155" y="254" width="36" height="34" rx="8" fill="#c0c7d1" ${K}/><path class="noink" d="M111 266 H143 M157 266 H189" stroke="#d93b2b" stroke-width="5"/>`],
+  glitter:['✨ Glitter shoes',`<path d="M106 286 C106 266 122 262 130 266 C140 270 148 276 148 286 Z" fill="#f29ab8" ${K}/><path d="M152 286 C152 276 160 270 170 266 C178 262 194 266 194 286 Z" fill="#f29ab8" ${K}/>${[[118,276],[132,272],[140,281],[162,276],[176,271],[186,280]].map(([x,y])=>`<circle class="noink" cx="${x}" cy="${y}" r="2.5" fill="#fff"/>`).join('')}`]});
+const RARE=['hat:royal','hat:astro','hat:unicorn','eyes:rainbow','eyes:diamond','neck:rainbowscarf','neck:goldbell','body:spacesuit','body:robe','feet:rocket','feet:glitter'];
+
+const ownsWear=(k,v)=>RARE.indexOf(k+':'+v)<0||!!(S.rare||{})[k+':'+v];
 const WEARNAMES={hat:'Hats',eyes:'Glasses',neck:'Neckwear',body:'Outfits',feet:'Paws'};
 const NOWEAR={hat:'none',eyes:'none',neck:'none',body:'none',feet:'none'};
 function applyWear(svg,w){if(!svg||svg.tagName.toLowerCase()!=='svg')return;w=Object.assign({},NOWEAR,w||shownWear());
@@ -1672,7 +1731,7 @@ function petPage(){
       ?`<button disabled>🔒 ${n}<small>at ${sname(P,need)}</small></button>`:`<button data-t="${k}">${ic} ${n}</button>`).join('')}</div>`;
   if(petTab==='style')panel=`<h3>Which panda?</h3><div class="wrow pickrow">${Object.entries(PCOATS).filter(([k])=>k!=='golden'||S.unlockGold).map(([k,c])=>`<button data-coat="${k}" class="${P.coat===k?'on':''}"><img src="${PIMG[k]}" alt="">${c[0]}</button>`).join('')}</div>
       <h3>Name</h3><div class="row rename"><input id="rename" maxlength="14" value="${esc(P.name)}" aria-label="Pet's name"><button id="renameBtn">Save name</button></div>
-      <h3>Dress up ${esc(P.name)}</h3>${Object.entries(WEAR).map(([k,items])=>{const cur=(P.wear||{})[k]||'none';return`<details class="wcat"${cur!=='none'||k==='hat'?' open':''}><summary>${WEARNAMES[k]||k}${cur!=='none'?`: <b>${esc(items[cur]?items[cur][0]:'')}</b>`:''}</summary><div class="wrow">${Object.entries(items).map(([v,[n]])=>
+      <h3>Dress up ${esc(P.name)}</h3>${Object.entries(WEAR).map(([k,items])=>{const cur=(P.wear||{})[k]||'none';return`<details class="wcat"${cur!=='none'||k==='hat'?' open':''}><summary>${WEARNAMES[k]||k}${cur!=='none'?`: <b>${esc(items[cur]?items[cur][0]:'')}</b>`:''}</summary><div class="wrow">${Object.entries(items).filter(([v])=>ownsWear(k,v)).map(([v,[n]])=>
         `<button data-pw="${k}:${v}" class="${cur===v?'on':''}">${n}</button>`).join('')}</div></details>`}).join('')}
       <div class="row"><button data-pw="off">🧺 Take everything off</button></div>
       <h3>Clothes Rishi designed</h3><p class="how">Draw your own in the Art Studio, and ${esc(P.name)} wears it!</p><div class="wrow dzrow">${Object.entries(WEAR_T).map(([k,t])=>{const has=P.dz&&P.dz[k];
@@ -1692,7 +1751,7 @@ function petPage(){
       <div class="ptabs">${tabs.map(([k,n])=>`<button data-tab="${k}" class="${petTab===k?'on':''}">${n}</button>`).join('')}</div>
       <div class="petopts">${panel}</div>
       <p class="how">Tip: tap your panda for a belly rub, or tap the bowl, the bed or the toy box in the room! Earn treats: read the paper each day (+2), pass a new level (+3), replay a level (+1).</p></div></div>`;
-  if(petTab==='park'){setupPark();return}
+  if(petTab==='park'){setupPark();mission('park');return}
   const svg=main.querySelector('.petbox .pet'),say=document.getElementById('psay'),root=main.querySelector('.petpage');
   applyWear(svg,P.wear.hat==='none'&&st===3?{...P.wear,hat:'crown'}:P.wear);
   if(P.asleep)svg.classList.add('asleep');
@@ -1717,23 +1776,23 @@ function petPage(){
     if(b.dataset.food||b.dataset.a==='feed'){const k=b.dataset.food||'bamboo';
       if(P.asleep){wake();document.getElementById('psay').textContent='*yaaawn* Did somebody say food?! 😋';
         setTimeout(()=>{const nb=main.querySelector(`[data-food="${k}"]`);if(nb)nb.click()},700);return}
-      feed(FOODS.find(f=>f[0]===k));return}
+      feed(FOODS.find(f=>f[0]===k));mission('feed');return}
     if(b.dataset.a){if(sleepy())return;const a=b.dataset.a;
-      if(a==='feed'){feed(FOODS[1]);return}
+      if(a==='feed'){feed(FOODS[1]);mission('feed');return}
       if(a==='pet'){plog(P,'rubs');anim('t-rub');burst(...mid(svg),['❤️','💛','💕']);joy(4);talk(['Belly rubs are the best!','Hee hee, my tummy tickles!','*happy panda wiggle*','More belly rubs, please!'][rnd(4)]);return}
       if(a==='ball'){plog(P,'ball');const ball=document.createElement('span');ball.className='ballfx';ball.textContent='🎾';document.getElementById('petbox').appendChild(ball);
         setTimeout(()=>{ball.remove();anim('happy');talk(['Got it! Again, again!','Ball is my favourite!','Throw it farther!'][rnd(3)])},900);joy(5);return}
       if(a==='bath'){plog(P,'bath');anim('t-shake');burst(...mid(svg),['🫧','💧','🧼','🫧']);joy(4);talk(['Splish splash!','*shake shake shake* Oops, sorry!','I smell like bamboo flowers now!'][rnd(3)]);return}}
-    if(b.dataset.t){if(sleepy())return;plog(P,'tricks');const t=TRICKS.find(x=>x[0]===b.dataset.t);anim('t-'+t[0]);joy(2);burst(...mid(svg),[t[3],'⭐']);
+    if(b.dataset.t){if(sleepy())return;plog(P,'tricks');mission('train');const t=TRICKS.find(x=>x[0]===b.dataset.t);anim('t-'+t[0]);joy(2);burst(...mid(svg),[t[3],'⭐']);
       talk({sit:'*plops down* Good panda? Good panda!',paw:'High five, Rishi! ✋',spin:'Wheee! Round and round!',roll:'Ta-da! A somersault!',dance:'Look at my moves! 🎵'}[t[0]]);return}
     if(b.dataset.coat){P.coat=b.dataset.coat;save();render();return}
     if(b.dataset.pw){P.wear=Object.assign({},NOWEAR,P.wear||{});if(b.dataset.pw==='off'){P.wear={...NOWEAR};talk('Back to just me!')}
-      else{const[k,v]=b.dataset.pw.split(':');P.wear[k]=v;talk(v==='none'?'Off it comes!':['Ooh, how fancy!','Do I look splendid?','I love it!','So stylish!'][rnd(4)])}
+      else{const[k,v]=b.dataset.pw.split(':');P.wear[k]=v;if(v!=='none')mission('dress');talk(v==='none'?'Off it comes!':['Ooh, how fancy!','Do I look splendid?','I love it!','So stylish!'][rnd(4)])}
       save();const y=window.scrollY;render();window.scrollTo(0,y);const sv=document.querySelector('#petbox .dog');if(sv){sv.classList.add('happy');setTimeout(()=>sv.classList.remove('happy'),600)}return}
     if(b.dataset.dzoff){delete P.dz[b.dataset.dzoff];save();const y=window.scrollY;render();window.scrollTo(0,y);return}
     if(b.dataset.ear){P.ear=b.dataset.ear;save();render();return}
     if(b.dataset.cl){closet=b.dataset.cl;render();return}
-    if(b.id==='surprise'){if(sleepy())return;for(const k of Object.keys(NOWEAR)){const o=Object.keys(WEAR[k]);P.wear[k]=Math.random()<.3?'none':o[1+rnd(o.length-1)]}
+    if(b.id==='surprise'){if(sleepy())return;mission('dress');for(const k of Object.keys(NOWEAR)){const o=Object.keys(WEAR[k]).filter(v=>ownsWear(k,v));P.wear[k]=Math.random()<.3?'none':o[1+rnd(o.length-1)]}
       save();render();const s2=main.querySelector('.petbox .pet');s2.classList.add('t-spin');burst(...mid(s2),['✨','👗','🎩','⭐']);
       document.getElementById('psay').textContent=['Ooh, how do I look?','Fancy! I feel like a movie star!','Is this my best outfit ever?'][rnd(3)];return}
     if(b.id==='undress'){P.wear={...NOWEAR};save();render();return}
@@ -1816,6 +1875,9 @@ function cleanBackup(d){if(!d||typeof d!=='object'||Array.isArray(d))return null
   if(o.set.roblox)o.set.roblox=arr(o.set.roblox).filter(g=>g&&/^https:\/\/www\.roblox\.com\/games\/\d+/.test(g.url)).map(g=>({id:str(g.id,20),name:str(g.name,40),url:g.url}));
   if(o.me)o.me=Object.fromEntries(Object.entries(obj(o.me)).map(([k,v])=>[str(k,10),str(v,40)]));
   o.items=[];o.day='';o.bonus=[];o.chat=arr(d.chat).filter(c=>Array.isArray(c)).slice(-30).map(c=>[c[0]==='r'?'r':'c',str(c[1],400)]);
+  o.rare=Object.fromEntries(Object.entries(obj(d.rare)).filter(([k])=>RARE.includes(k)).map(([k,v])=>[k,str(v,10)]));
+  o.reports=arr(d.reports).filter(r=>r&&typeof r==='object').slice(-30).map(r=>({id:num(r.id,1e14),d:str(r.d,10),h:str(r.h,70),b:str(r.b,700),p:str(String(r.p||''),20),printed:str(r.printed,10)}));
+  delete o.repDraft;o.pack=obj(d.pack);
   if(d.wear)o.wear=Object.fromEntries(Object.entries(obj(d.wear)).map(([k,v])=>[str(k,10),str(v,20)]));
   return o}
 function backupDue(){const d=S.lastBackup?Math.round((new Date(today)-new Date(S.lastBackup))/864e5):(S.days||[]).length;return d>=14}
@@ -1872,7 +1934,7 @@ function readPaper(btn){
     `Did you know? ${document.getElementById('fact').textContent}`,`The weather report says: ${document.getElementById('weather').textContent}.`,
     `Now, the joke of the day. ${jk[0]}`,jk[1],`In the funny pages: ${title}. ${panels.map(x=>x[0]).join(' ')}`,
     S.pets.length?`And a special hello to ${S.pets.map(p=>p.name).join(' and ')}!`:'',"That's all the news for today. Cheerio!"],()=>{const b=document.getElementById('readPaper');if(b)b.textContent="🔊 Chief, read me today's paper!"});
-  if(btn&&S.set.voice)btn.textContent='⏹ Stop reading';
+  if(btn&&S.set.voice)btn.textContent='⏹ Stop reading';mission('listen');
 }
 
 // ---- funny pages: comics, jokes, riddles
@@ -1957,7 +2019,7 @@ function setupLetters(){
     S.letters.push({d:today,text:mode==='type'?text:'',img});S.st.letters++;if(img){S.st.drawings++;S.gallery.unshift({d:today,img});S.gallery=S.gallery.slice(0,16)}
     let withImg=0;for(let i=S.letters.length-1;i>=0;i--)if(S.letters[i].img&&++withImg>6)S.letters[i].img='';
     S.letters=S.letters.slice(-12);save();burst(e.clientX||innerWidth/2,e.clientY||300,['✉️','💌','🐾']);
-    toast("📮 Letter sent! Chief Bamboozle will write back in tomorrow's paper.");render()};
+    toast("📮 Letter sent! Chief Bamboozle will write back in tomorrow's paper.");render();mission('letter')};
 }
 
 // ---- colouring pages (each .rg shape can be painted)
@@ -2011,7 +2073,7 @@ function colouring(box,L,stat){let page=CPAGES[S.cpage]?S.cpage:'home',col=PAL[0
 function dressUp(box,L,stat){stat('Free play');
   const names=WEARNAMES;
   const draw=()=>{box.innerHTML=`<div class="dress"><div class="dprev">${chiefDressed(S.wear)}<p class="byline">Chief Bamboozle, looking sharp!</p></div>
-    <div class="wardrobe">${Object.entries(WEAR).filter(([k])=>CWEAR[k]).map(([k,items])=>`<h3>${names[k]}</h3><div class="wrow">${Object.entries(items).map(([v,[n]])=>
+    <div class="wardrobe">${Object.entries(WEAR).filter(([k])=>CWEAR[k]).map(([k,items])=>`<h3>${names[k]}</h3><div class="wrow">${Object.entries(items).filter(([v])=>ownsWear(k,v)).map(([v,[n]])=>
       `<button data-k="${k}" data-v="${v}" class="${S.wear[k]===v?'on':''}">${n}</button>`).join('')}</div>`).join('')}</div></div>`;
     };
   box.onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;S.wear[b.dataset.k]=b.dataset.v;save();
@@ -2730,7 +2792,8 @@ function artSaveNow(){const visible=A.acts.some(a=>a.t!=='c')||A.mode!=='free';i
   S.art.unshift({id,d:today,img,t:A.title,rep});S.art=S.art.slice(0,24);S.art.forEach((a,i)=>{if(i>=6)delete a.rep});S.st.art++;petXP(5,'art');
   let bonus='';if(S.artDay!==today){S.artDay=today;S.treats+=2;bonus=' +2 🎋 treats!'}
   if(!storeSafely()){S.art.shift();toast("⚠️ Couldn't save that picture: the device storage is full. Ask a grown-up to delete some old gallery pictures.");return}A.dirty=false;
-  const r=review(S.art[0]);toast(`🖼️ Saved to Rishi's Gallery!${bonus} Chief says: “${esc(r)}”`);speak(r);burst(innerWidth/2,innerHeight/3,['🖼️','✨','⭐','🎨']);checkBadges()}
+  const r=review(S.art[0]);toast(`🖼️ Saved to Rishi's Gallery!${bonus} Chief says: “${esc(r)}”`);speak(r);burst(innerWidth/2,innerHeight/3,['🖼️','✨','⭐','🎨']);checkBadges();mission('art');
+  if(repReturn){repReturn=false;repPick=S.art[0].id;S.repDraft=Object.assign(S.repDraft||{h:'',b:''},{p:repPick});save();setTimeout(()=>{view='reporter';render();scrollTo({top:0})},900)}}
 function wearNow(){const T=WEAR_T[A.wear],P=S.pets[A.pet],path=new Path2D(T.d),c=document.createElement('canvas');c.width=AW;c.height=AH;const g=c.getContext('2d');
   g.save();g.clip(path);g.fillStyle='#fff';g.fillRect(0,0,AW,AH);g.drawImage(cvD,0,0);g.restore();g.drawImage(cvL,0,0);
   const bb={shirt:[180,100,600,560],hat:[220,130,520,440],tag:[200,70,560,600],dress:[180,100,600,560],cape:[170,110,620,620],bow:[180,190,600,350]}[A.wear],o=document.createElement('canvas'),sc=300/bb[2];o.width=300;o.height=Math.round(bb[3]*sc);
@@ -3080,7 +3143,8 @@ const SPOTS=[
   ['school','reader','Panda School',1,71.8,44,'Maths, spelling, reading'],['chat','🍵',"Chief's Tea House",1,78.7,13,'Talk to Chief'],
   ['story','📖','The Library',2,19.5,64,'Weekly story adventures'],['forest','hiker','Bamboo Forest',2,19.3,38,'Walk with your pandas'],
   ['stickers','explorer','Market Street',2,64,75,'Sticker album'],['market','chef','Restaurant Row',3,84,70,'Panda Snack Shop'],
-  ['spring','spring','Hot Springs',4,88,88,'A warm panda soak'],['lake','fisher','Panda Lake',5,53.9,66,'Panda Jump'],['mountain','snow','Adventure Peak',6,31.7,19,'Hall of Fame']];
+  ['spring','spring','Hot Springs',4,88,88,'A warm panda soak'],['lake','fisher','Panda Lake',5,53.9,66,'Panda Jump'],['mountain','snow','Adventure Peak',6,31.7,19,'Hall of Fame'],
+  ['temple','📜','Panda Temple',1,57.5,25,"Chief's missions"],['cable','🚡','Sky Cable Car',2,42.5,19,'Countdowns and packing'],['ship','⛵','Treasure Ship',3,46,88,'Rare outfit treasure']];
 function spotIcon(ic){return ic==='CHIEF'?`<img src="${CHIEF}" alt="">`:WIMG[ic]?`<img src="${WIMG[ic]}" alt="">`:`<span>${ic}</span>`}
 let wanderT=null;
 function worldPage(){clearInterval(wanderT);const l=wlevel(),p=epoints(),nx=WLV[l]||null,nextSpot=SPOTS.find(s=>s[3]===l+1);
@@ -3101,7 +3165,154 @@ function worldPage(){clearInterval(wanderT);const l=wlevel(),p=epoints(),nx=WLV[
   main.querySelectorAll('.wpet').forEach(b=>b.onclick=()=>{S.petIdx=+b.dataset.wp;save();const P=S.pets[S.petIdx];toast(`🐼 ${esc(P.name)}: “${['Hi Rishi!','Let\'s explore!','I love this map!','Where shall we go?'][rnd(4)]}”`)});
   const open=SPOTS.filter(s=>s[3]<=l),move=()=>main.querySelectorAll('.wpet').forEach(b=>{const s=open[rnd(open.length)];b.style.left=(s[4]+rnd(9)-4)+'%';b.style.top=(s[5]+6+rnd(6))+'%'});
   setTimeout(move,300);wanderT=setInterval(()=>{if(view!=='world'){clearInterval(wanderT);return}move()},4200)}
-function goSpot(id){endGame();const v={newsroom:'today',house:'pet',art:'art',games:'games',school:'school',chat:'chat',story:'story',forest:'pet',spring:'spring',mountain:'fame',stickers:'album'}[id];
+// ---------------- Panda World expansion: missions, treasure, reporter, cable car ----------------
+S.mis=S.mis||{};S.reports=Array.isArray(S.reports)?S.reports:[];S.rare=S.rare||{};S.pack=S.pack||{};
+const dayOf=s=>new Date(s+'T12:00');const plural=(n,w)=>`${n} ${w}${n===1?'':'s'}`;
+const jumpTo=sel=>{view='today';render();setTimeout(()=>{const el=main.querySelector(sel);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},150)};
+const backW='<button class="abk" data-w="1">← Panda World</button>';
+const bindBackW=()=>{const b=main.querySelector('[data-w]');if(b)b.onclick=()=>{view='world';render();scrollTo({top:0})}};
+const MISSIONS={
+  feed:['🎋','Give one of your pandas a snack','pet:care'],
+  park:['🌳','Take your pandas to the bamboo forest','pet:park'],
+  train:['🎓','Practise a trick with your panda','pet:tricks'],
+  dress:['👗','Dress up a panda in something new','pet:style'],
+  level:['🧩','Pass a level in Puzzles & Games','games'],
+  art:['🎨','Save a picture to your art gallery','art'],
+  bebe:['🐶','Find Bebe on the Panda World map','world'],
+  school:['✏️','Do a lesson at Panda School','school'],
+  story:['📖','Finish a chapter at The Library','story'],
+  report:['📝','Write a story as a Cub Reporter','reporter'],
+  letter:['💌','Send a letter to Chief Bamboozle','letters'],
+  joke:['😂','Reveal a riddle answer in the Funny Pages','funny'],
+  listen:['🔊',"Have Chief read you today's paper",'listen'],
+  chat:['🍵','Ask Chief a question at the Tea House','chat']};
+const MGROUPS=[['feed','park','train','dress','feed','dress'],['level','art','bebe','school','level','art'],['story','report','letter','joke','listen','chat','report']];
+function todaysMissions(){if(S.mis.d!==today){const list=[];MGROUPS.forEach((g,i)=>{let k=dailyAt(g,40+i,DAYN),j=0;while(list.indexOf(k)>=0&&j<g.length){k=g[j++]}list.push(k)});
+  if(!S.pets.length)list[0]='bebe'===list[1]?'level':'bebe';S.mis={d:today,list,done:{}};save()}return S.mis}
+const mondayOf=s=>{const d=dayOf(s);d.setDate(d.getDate()-(d.getDay()+6)%7);return day(d)};
+const isSunday=()=>dayOf(today).getDay()===0;
+function weekState(){const wk=mondayOf(today);
+  if(!S.week||S.week.id!==wk){if(S.week&&!S.week.opened&&S.week.days&&S.week.days.length)S.chestOld={n:S.week.days.length};S.week={id:wk,days:[],opened:false};save()}
+  return S.week}
+const chestReady=()=>{const w=weekState();return!!S.chestOld||(isSunday()&&!w.opened&&w.days.length>0)};
+function mission(k){try{const m=todaysMissions();if(m.list.indexOf(k)<0||m.done[k])return;m.done[k]=1;S.treats+=1;
+  const all3=m.list.every(x=>m.done[x]);let msg=`✅ Mission done: ${MISSIONS[k][1]}! +1 🎋`;
+  if(all3){const w=weekState();if(w.days.indexOf(today)<0)w.days.push(today);S.treats+=2;msg=`🔑 All 3 missions done! +3 🎋 and a key for ${isSunday()?"today's":"Sunday's"} treasure chest!`}
+  save();setTimeout(()=>{toast(msg);if(all3){burst(innerWidth/2,innerHeight/3,['🔑','⭐','🐼','🎉']);speak('Jolly good show! All three missions done. Here is a key for the treasure chest!')}},350);
+  const mb=document.querySelector('.missions');if(mb)mb.outerHTML=missionsHTML();checkBadges()}catch(e){}}
+function missionsHTML(){const m=todaysMissions(),w=weekState(),mon=dayOf(w.id),DN=['M','T','W','T','F','S','S'];
+  const slots=DN.map((n,i)=>{const d=new Date(mon);d.setDate(d.getDate()+i);const ds=day(d),got=w.days.indexOf(ds)>=0;
+    return`<span class="wslot${got?' got':''}${ds===today?' now':''}${i===6?' sun':''}"><i>${i===6?(w.opened?'📭':'🎁'):got?'🔑':'·'}</i><small>${n}</small></span>`}).join('');
+  const left=m.list.filter(k=>!m.done[k]).length;
+  return`<section class="box missions"><h3>🗒️ Chief's Missions for Today</h3>
+    <ul>${m.list.map(k=>{const[ic,t,go]=MISSIONS[k],ok=!!m.done[k];return`<li class="${ok?'done':''}"><span class="mchk">${ok?'✅':'⬜'}</span><span class="mt">${ic} ${t}</span>${ok?'':`<button data-mgo="${go}">Go!</button>`}</li>`}).join('')}</ul>
+    <div class="week"><div class="wslots">${slots}</div><p>${chestReady()?'<button class="go chestOpen">🎁 Open the treasure chest!</button>'
+      :left?`Finish all 3 missions to earn a 🔑 key. On Sunday, the keys open a treasure chest on the Treasure Ship, with rare outfits inside!`:`🔑 Today's key is earned! ${isSunday()&&w.opened?'See you next week for a new chest.':'The more keys, the better the chest on Sunday.'}`}</p></div></section>`}
+function missionGo(go){endGame();const[v,t]=go.split(':');
+  if(v==='pet'){view='pet';petTab=t;render();scrollTo({top:0});return}
+  if(v==='letters'){jumpTo('.letters');return}
+  if(v==='funny'){jumpTo('.comic');return}
+  if(v==='listen'){jumpTo('.readbar');setTimeout(()=>readPaper(document.getElementById('readPaper')),300);return}
+  view=v;render();scrollTo({top:0})}
+document.addEventListener('click',e=>{const g=e.target.closest('[data-mgo]');if(g){e.preventDefault();missionGo(g.dataset.mgo);return}
+  if(e.target.closest('.chestOpen'))openChest()});
+
+// ---- rare outfits: from the Sunday treasure chest, or a 7-day Bebe streak
+const RAREICON={royal:'👑',astro:'🧑‍🚀',unicorn:'🦄',rainbow:'🌈',diamond:'💎',rainbowscarf:'🧣',goldbell:'⭐',spacesuit:'🚀',robe:'👘',rocket:'🚀',glitter:'✨'};
+function giveRare(){const left=RARE.filter(r=>!S.rare[r]);if(!left.length)return null;const r=left[rnd(left.length)],[k,v]=r.split(':');S.rare[r]=today;return`${RAREICON[v]||'✨'} Rare outfit: <b>${WEAR[k][v][0].replace('✨ ','')}</b>`}
+const CHESTSVG=`<svg class="chest" viewBox="0 0 200 170"><ellipse cx="100" cy="160" rx="80" ry="8" fill="#000" opacity=".15"/>
+  <g class="cglow"><circle cx="100" cy="82" r="60" fill="#f6d13a" opacity=".45"/></g>
+  <rect x="26" y="80" width="148" height="76" rx="8" fill="#a0612e" stroke="#1f1a14" stroke-width="4"/>
+  <rect x="26" y="80" width="148" height="14" fill="#7a4520"/><rect x="40" y="80" width="14" height="76" fill="#d8a32a" stroke="#1f1a14" stroke-width="3"/><rect x="146" y="80" width="14" height="76" fill="#d8a32a" stroke="#1f1a14" stroke-width="3"/>
+  <g class="lid"><path d="M26 82 L26 56 Q100 8 174 56 L174 82 Z" fill="#b8733a" stroke="#1f1a14" stroke-width="4" stroke-linejoin="round"/><path d="M40 82 L40 46 M160 82 L160 46" stroke="#d8a32a" stroke-width="12"/></g>
+  <rect x="88" y="74" width="24" height="28" rx="4" fill="#f6c945" stroke="#1f1a14" stroke-width="3"/><circle cx="100" cy="86" r="4" fill="#1f1a14"/></svg>`;
+function openChest(){if(!chestReady())return;const n=S.chestOld?S.chestOld.n:weekState().days.length;
+  modal(`<h3>Sunday Treasure Chest</h3><p>You earned <b>${plural(n,'key')}</b> this week! Tap the chest to open it.</p><button id="chestTap" class="chestbtn" aria-label="Open the chest">${CHESTSVG}</button><div id="chestOut"></div>`);
+  document.getElementById('chestTap').onclick=e=>{const btn=e.currentTarget;if(btn.classList.contains('open'))return;btn.classList.add('open');
+    const treats=2+3*n+(n>=7?10:0),got=[`🎋 <b>${treats} treats</b>`];S.treats+=treats;
+    const want=n>=7?2:n>=3?1:0;for(let i=0;i<want;i++){const r=giveRare();if(!r){S.treats+=5;got.push('🎋 <b>5 bonus treats</b> (you have every rare outfit!)');break}got.push(r)}
+    if(!want)got.push('<small>Earn 3 or more keys next week to win a rare outfit!</small>');
+    if(S.chestOld)delete S.chestOld;else weekState().opened=true;save();checkBadges();
+    sfx(880,.1);setTimeout(()=>sfx(1320,.2),120);burst(innerWidth/2,innerHeight/2,['✨','⭐','🎋','🎉','👑']);
+    setTimeout(()=>{document.getElementById('chestOut').innerHTML=`<ul class="loot">${got.map(g=>`<li>${g}</li>`).join('')}</ul>${want?'<p class="how">Find rare outfits in <b>My Panda → Style</b>. They sparkle with ✨!</p>':''}
+      <div class="rbtns"><button id="chestOk" class="go">Hooray!</button></div>`;document.getElementById('chestOk').onclick=()=>{closeModal();render()}},700)}}
+function shipPage(){const w=weekState(),own=RARE.filter(r=>S.rare[r]).length;
+  main.innerHTML=`${backW}<h2 class="sec">The Treasure Ship</h2><div class="box cavebox"><div class="cimg">⛵</div><p>Captain Chief keeps the rarest outfits in Panda World locked in the ship's hold. You've found <b>${own} of ${RARE.length}</b>!</p>
+    <div class="rarelist">${RARE.map(r=>{const[k,v]=r.split(':'),got=!!S.rare[r];return`<div class="rare${got?' got':''}"><span>${got?(RAREICON[v]||'✨'):'❔'}</span><b>${got?WEAR[k][v][0].replace('✨ ',''):'Still hidden'}</b><small>${got?'Found '+fmt(S.rare[r]):'???'}</small></div>`}).join('')}</div>
+    <p class="how">💎 How to find them: finish all 3 of Chief's missions to earn keys for the Sunday treasure chest (3 keys or more = a rare outfit, 7 keys = two!), or find Bebe 7 days in a row. This week you have <b>${plural(w.days.length,'key')}</b>.</p>
+    ${chestReady()?'<div class="rbtns"><button class="go chestOpen">🎁 Open the treasure chest!</button></div>':''}</div>${missionsHTML()}`;bindBackW()}
+
+// ---- Cub Reporter: Rishi writes tomorrow's front page
+const REPIDEAS=['My Panda Learned a New Trick!','Breaking News: Snow Day!','The Best Day Ever','Mystery in the Kitchen','Interview with My Panda',
+  'My Favourite Food in the Whole World','A Day at the Park','Top Secret: My Toy Collection','Weather Report from My Window','What I Dreamed Last Night',
+  'Family Fun Night','A Very Silly Thing Happened','My Best Friend','How to Look After a Panda','The Coolest Thing I Saw Today','My Roblox Adventure'];
+const REPNOTES=["Stop the presses! This is the best story we've had all year.","Brilliant reporting, Rishi. You have a nose for news!",
+  "I read it three times over a cup of bamboo tea. Splendid!","Golden Bamboo Prize material, I say!","Our readers will be talking about this for weeks!","Jolly good writing! You're a natural reporter."];
+let repPick=null,repReturn=false;
+const repPic=r=>{if(!r||!r.p)return'';const a=S.art.find(x=>String(x.id)===String(r.p));return a?a.img:''};
+const repParas=t=>String(t||'').split(/\n+/).map(x=>x.trim()).filter(Boolean).map(x=>`<p>${esc(x)}</p>`).join('');
+function scoopToday(){const old=S.reports.filter(r=>r.d<today&&(!r.printed||r.printed===today));if(!old.length)return null;
+  let ch=false;old.forEach(x=>{if(!x.printed){x.printed=today;ch=true}});if(ch)save();return old[old.length-1]}
+function scoopHTML(){const r=scoopToday();if(!r)return'';const img=repPic(r),note=REPNOTES[hash(String(r.id))%REPNOTES.length];
+  return`<article class="card scoop"><p class="kicker">🗞️ Front Page Exclusive · Special Report</p><h2 class="hl">${esc(r.h||'Big News!')}</h2>
+    <p class="byline">By <b>Rishi</b>, Cub Reporter · written ${fmt(r.d)}</p>${img?`<div class="scoopimg"><img src="${img}" alt="Rishi's picture"></div>`:''}
+    <div class="scooptext">${repParas(r.b)}</div><p class="chiefnote"><b>Editor's note:</b> “${note}” <span>— Chief Bamboozle</span></p>
+    <button class="sayit" data-say="${esc(`A special report by Rishi, our cub reporter. ${r.h||''}. ${r.b||''}. Editor's note: ${note}`)}">🔊 Chief, read Rishi's story</button></article>`}
+function repBoxHTML(){const mine=S.reports.find(r=>r.d===today);
+  return`<section class="box repbox"><h3>📝 Cub Reporter Desk</h3>${mine?`<p class="sent">🗞️ Your story <b>“${esc(mine.h||'Untitled')}”</b> is at the printing press. Look for it on tomorrow's front page!</p><button data-mgo="reporter">✏️ Change my story</button>`
+    :`<p>Write a story for the paper! It gets printed as the <b>front page headline</b> tomorrow, with your name on it.</p><button data-mgo="reporter" class="go">✏️ Write a story</button>`}</section>`}
+function reporterPage(){const mine=S.reports.find(r=>r.d===today),dr=S.repDraft||(mine?{h:mine.h,b:mine.b,p:mine.p}:{h:'',b:'',p:''});if(repPick===null)repPick=dr.p||'';
+  const pics=S.art.slice(0,12),past=S.reports.slice().reverse();
+  main.innerHTML=`<div class="reporter"><button class="abk" data-back="1">← Back to the paper</button><h2 class="sec">Cub Reporter Desk</h2><p class="lede">Write a story today, and it's tomorrow's front page headline!</p>
+  <div class="repdesk box">${mine?`<p class="sent">🗞️ “${esc(mine.h||'Untitled')}” is already at the press. You can change it until tomorrow.</p>`:''}
+    <label class="rl"><span>1. Your headline</span><input id="rhead" maxlength="70" value="${esc(dr.h)}" placeholder="Big news!"></label>
+    <p class="ideas">💡 Stuck? <button id="ridea" type="button">Give me an idea</button></p>
+    <label class="rl"><span>2. Your story</span><textarea id="rbody" maxlength="700" placeholder="What happened? Who was there? How did it feel?">${esc(dr.b)}</textarea></label>
+    <p class="how small">Tip: tap the 🎤 on the keyboard to say your story out loud instead of typing.</p>
+    <div class="rl"><span>3. Pick a picture from your art gallery</span></div>
+    <div class="rpics"><button data-rp="" class="nopic${repPick?'':' on'}">🚫<small>No picture</small></button>${pics.map(g=>`<button data-rp="${esc(String(g.id))}" class="${String(g.id)===String(repPick)?'on':''}" aria-label="${esc(g.t||'Picture')}"><img src="${g.img}" alt=""></button>`).join('')}
+      <button data-rdraw="1" class="nopic">🎨<small>Draw a new one</small></button></div>
+    <div class="rbtns"><button id="rsend" class="go">🗞️ Send to the printing press!</button></div><p class="err" id="rerr"></p></div>
+  ${past.length?`<h2 class="sec">My Stories</h2><div class="mystories">${past.map(r=>`<details class="box"><summary><b>${esc(r.h||'Untitled')}</b><small>${r.d===today?'At the press · prints tomorrow':'Printed '+fmt(r.printed||r.d)}</small></summary>
+    ${repPic(r)?`<img src="${repPic(r)}" alt="">`:''}${repParas(r.b)}<button class="sayit" data-say="${esc((r.h||'')+'. '+(r.b||''))}">🔊 Read it to me</button></details>`).join('')}</div>`:''}</div>`;
+  const q=id=>document.getElementById(id);
+  main.querySelector('[data-back]').onclick=()=>{view='today';render();scrollTo({top:0})};
+  const keep=()=>{S.repDraft={h:q('rhead').value.slice(0,70),b:q('rbody').value.slice(0,700),p:repPick};save()};
+  q('rhead').onchange=keep;q('rbody').onchange=keep;
+  q('ridea').onclick=()=>{const cur=q('rhead').value;let i;do i=REPIDEAS[rnd(REPIDEAS.length)];while(i===cur);q('rhead').value=i;keep()};
+  main.querySelector('.rpics').onclick=e=>{const b=e.target.closest('button');if(!b)return;
+    if(b.dataset.rdraw){keep();repReturn=true;toast('🎨 Draw your picture, then tap Save. It will go straight into your story!');view='art';render();artOpen({mode:'free'});return}
+    repPick=b.dataset.rp;main.querySelectorAll('.rpics button').forEach(x=>x.classList.toggle('on',x===b));keep()};
+  q('rsend').onclick=e=>{const h=q('rhead').value.trim().slice(0,70),b=q('rbody').value.trim().slice(0,700);
+    if(!h&&!b){q('rerr').textContent='Write a headline or a story first!';return}
+    S.reports=S.reports.filter(r=>r.d!==today);S.reports.push({id:Date.now(),d:today,h,b,p:repPick||''});S.reports=S.reports.slice(-30);
+    S.repDraft=null;repPick=null;save();mission('report');burst(e.clientX||innerWidth/2,e.clientY||300,['🗞️','⭐','✏️','🐼']);
+    speak("Stop the presses! A brand new story from our cub reporter Rishi. It will be on tomorrow's front page!");
+    toast("🗞️ Stop the presses! Your story will be on tomorrow's front page.");view='today';render();setTimeout(()=>{const el=main.querySelector('.repbox');if(el)el.scrollIntoView({behavior:'smooth',block:'center'})},150)}}
+
+// ---- Sky Cable Car: countdown departures board and packing list
+const PACK=[['👕','Clothes'],['🪥','Toothbrush'],['🧸','Favourite cuddly toy'],['📚','A book for the trip'],['🎧','Headphones'],['🖍️','Crayons and paper'],['👙','Swimsuit'],['🧴','Sunscreen'],['🕶️','Sunglasses'],['👒','Sun hat'],['🩴','Flip-flops'],['🪣','Sand bucket']];
+function cablePage(){const cds=cdList(),b=bdayInfo(),trip=cds.find(c=>c.id[0]==='u'&&c.days<=45);
+  const row=(ic,dest,when,n,st)=>`<div class="frow"><span>${ic}</span><b>${dest}</b><span>${when}</span><span class="fst ${st}">${n}</span></div>`;
+  const short=d=>new Date(d+'T12:00').toLocaleDateString('en-CA',{month:'short',day:'numeric'});
+  const pk=S.pack[trip?trip.date:'']||{},got=PACK.filter(p=>pk[p[1]]).length;
+  main.innerHTML=`${backW}<h2 class="sec">Sky Cable Car</h2><p class="lede">Every big day is a stop on the cable car. How many sleeps until we get there?</p><div class="fboard"><div class="fhead"><span class="fic">🚡</span><b>NEXT STOPS</b></div>
+    <div class="frow fh"><span></span><b>Stop</b><span>Date</span><span>Sleeps</span></div>
+    ${cds.map(c=>row(c.icon,c.id==='xmas'?'North Pole Express':esc(c.sub||c.t),short(c.date),c.days===0?'TODAY!':c.days,c.days===0?'now':c.days<=7?'soon':'')).join('')}
+    ${b?row('🎂',"Rishi's Birthday Bay",short(day(b.next)),b.days===0?'TODAY!':b.days,b.days<=7?'soon':''):''}
+    ${!cds.length&&!b?'<p class="how" style="color:#f3d36b">No stops yet! A grown-up can add countdowns in the Parent corner.</p>':''}</div>
+    ${trip?`<div class="box packbox"><h3>🧳 Pack your suitcase for ${esc(trip.sub||trip.t)}! <small>${got} of ${PACK.length} packed</small></h3><div class="pack">${PACK.map(([ic,n])=>`<button data-pk="${esc(n)}" class="${pk[n]?'on':''}"><span>${ic}</span>${n}${pk[n]?' ✅':''}</button>`).join('')}</div>
+      <p class="how">Tap each thing when it's in your suitcase. A grown-up can help!</p></div>`:''}`;
+  bindBackW();
+  const pe=main.querySelector('.pack');if(pe)pe.onclick=e=>{const bt=e.target.closest('[data-pk]');if(!bt)return;const n=bt.dataset.pk,P2=S.pack[trip.date]=S.pack[trip.date]||{};
+    if(P2[n])delete P2[n];else{P2[n]=1;sfx(700,.06)}const all=PACK.every(p=>P2[p[1]]);save();cablePage();if(all&&P2[n]){burst(innerWidth/2,innerHeight/2,['🧳','🚡','☀️','🎉']);speak('All packed! What an adventure this will be!')}}}
+
+BADGES.push(['key1','🔑','Mission Accomplished',"Finish all 3 of Chief's missions in one day",s=>!!(S.week&&S.week.days&&S.week.days.length)||Object.keys(S.rare||{}).length>0],
+  ['rare1','💎','Treasure Hunter','Find your first rare outfit',s=>Object.keys(S.rare||{}).length>=1],
+  ['rareall','👑','Captain of the Ship','Find every rare outfit',s=>RARE.every(r=>(S.rare||{})[r])],
+  ['report1','🗞️','Cub Reporter','Write a story for the front page',s=>S.reports.length>=1]);
+
+function goSpot(id){endGame();if(id==='temple'){view='missions';render();scrollTo({top:0});return}if(id==='ship'){view='ship';render();scrollTo({top:0});return}if(id==='cable'){view='cable';render();scrollTo({top:0});return}const v={newsroom:'today',house:'pet',art:'art',games:'games',school:'school',chat:'chat',story:'story',forest:'pet',spring:'spring',mountain:'fame',stickers:'album'}[id];
   if(id==='house')petTab='care';if(id==='forest')petTab='park';
   if(id==='market'||id==='lake'){view='games';render();openGame(id==='market'?'snack':'jump');scrollTo({top:0});return}
   view=v;render();scrollTo({top:0})}
@@ -3167,7 +3378,7 @@ function chatPage(){const SR=window.SpeechRecognition||window.webkitSpeechRecogn
     ${!SR?'<p class="how">Talking out loud isn\'t available in this browser. Typing and the buttons always work.</p>':S.set.mic?'':'<p class="how">Talking out loud is switched off. A grown-up can turn it on in the Parent corner. Typing and the buttons always work.</p>'}</div>`;
   const log=document.getElementById('clog');log.scrollTop=log.scrollHeight;
   const add=(w,x)=>{S.chat.push([w,x]);S.chat=S.chat.slice(-30);save();const p=document.createElement('p');p.className='cm '+w;p.textContent=x;log.appendChild(p);log.scrollTop=log.scrollHeight};
-  const ask=q=>{q=q.trim();if(!q)return;add('r',q);const a=chiefReply(q);setTimeout(()=>{add('c',a);speak(a.replace(/[🎵💕🐼🎂]/g,''))},400)};
+  const ask=q=>{q=q.trim();if(!q)return;add('r',q);const a=chiefReply(q);mission('chat');setTimeout(()=>{add('c',a);speak(a.replace(/[🎵💕🐼🎂]/g,''))},400)};
   main.querySelector('.cchips').onclick=e=>{const b=e.target.closest('[data-cq]');if(b)ask(b.dataset.cq)};
   const tx=document.getElementById('ctxt');document.getElementById('csend').onclick=()=>{ask(tx.value);tx.value=''};tx.onkeydown=e=>{if(e.key==='Enter'){ask(tx.value);tx.value=''}};
   const mic=document.getElementById('cmic');if(SR&&S.set.mic)mic.onclick=()=>{try{speechSynthesis.cancel()}catch(e){}const r=new SR();r.lang='en-CA';r.interimResults=false;r.maxAlternatives=1;
@@ -3229,7 +3440,7 @@ function storyScene(){const s=STORIES[storyNow.i],nd=s.n[storyNow.node],txt=stor
       :`<div class="stch">${nd[1].map(([c,n])=>`<button class="go" data-n="${n}">${esc(storyFill(c))}</button>`).join('')}</div>`}</div>`;
   const read=()=>speak(txt.replace(/[“”]/g,''));document.getElementById('stRead').onclick=read;if(S.set.voice!==false)setTimeout(read,350);
   document.getElementById('stBack').onclick=()=>{storyNow=null;try{speechSynthesis.cancel()}catch(e){}storyPage()};
-  if(end){const d=S.storyDone[s.id]=S.storyDone[s.id]||[];if(!d.includes(storyNow.node)){const first=!d.length;d.push(storyNow.node);if(first){S.treats+=5;petXP(5,'smart');toast('📖 Chapter finished! +5 🎋 treats');burst(innerWidth/2,innerHeight/2,['📖','🌟','🎉'])}
+  if(end){const d=S.storyDone[s.id]=S.storyDone[s.id]||[];if(!d.includes(storyNow.node)){const first=!d.length;d.push(storyNow.node);mission('story');if(first){S.treats+=5;petXP(5,'smart');toast('📖 Chapter finished! +5 🎋 treats');burst(innerWidth/2,innerHeight/2,['📖','🌟','🎉'])}
       else toast('🌟 You found a new ending!');save();checkBadges()}
     document.getElementById('stAgain').onclick=()=>{storyNow={i:storyNow.i,node:'a'};storyScene()};document.getElementById('stDone').onclick=()=>{storyNow=null;try{speechSynthesis.cancel()}catch(e){}storyPage()}}
   else main.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{try{speechSynthesis.cancel()}catch(e){}storyNow.node=b.dataset.n;storyScene();scrollTo({top:main.offsetTop-10,behavior:'smooth'})})}
@@ -3296,7 +3507,7 @@ function schoolQ(){const k=SCH.k,lv=S.school.lv[k];if(SCH.n>=SCH.total)return sc
   document.getElementById('scBack').onclick=()=>{SCH=null;schoolPage()}}
 function schoolDone(){const k=SCH.k,sc=S.school,g=SCH.good,t=SCH.total,old=sc.lv[k];let msg='';
   if(g>=t*.8&&old<MAXLV[k]){sc.lv[k]++;msg=`⬆️ Level up! ${SUBJ.find(s=>s[0]===k)[2]} is now level ${sc.lv[k]}.`}else if(g<=t*.4&&old>1){sc.lv[k]--;msg="Let's practise an easier level next time."}
-  if(sc.day!==today){sc.day=today;sc.paid=0}const tr=Math.min(5,Math.floor(g/2)),give=sc.paid<3?tr:0;if(give){S.treats+=give;sc.paid++}save();checkBadges();
+  if(sc.day!==today){sc.day=today;sc.paid=0}const tr=Math.min(5,Math.floor(g/2)),give=sc.paid<3?tr:0;if(give){S.treats+=give;sc.paid++}save();checkBadges();mission('school');
   const cheer=g===t?'Perfect score! Top of the class!':g>=t*.8?'Splendid work, Rishi!':g>=t*.5?'Jolly good effort!':'Good try! Practice makes perfect.';speak(cheer);
   main.innerHTML=`<div class="result"><div class="rchief"><img src="${CHIEF}" alt=""><p class="bubble">${cheer}</p></div><div class="medal">${g===t?'🏆':g>=t*.8?'🏅':'📚'}</div>
     <h3>${g} out of ${t} right!</h3>${msg?`<p class="reward">${msg}</p>`:''}${give?`<p class="reward">+${give} 🎋 treats</p>`:''}
@@ -3329,6 +3540,7 @@ function bebePrize(){const b=S.bebe,n=b.found;let txt,treats=3+Math.min(4,b.stre
   if(n%5===0){try{const st=awardSticker();if(st)txt+=` · a new sticker: ${st}`}catch(e){}}
   if(n===10&&!S.unlockGold){S.unlockGold=true;txt+=' · ✨ the Golden panda look!'}
   if(n%7===0){S.treats+=10;txt+=' · 🎁 BONUS +10 treats!'}
+  if(b.streak>0&&b.streak%7===0){const r=giveRare();if(r)txt+=' · '+r.replace(/<\/?b>/g,'')}
   return txt}
 function bebeWorldHTML(){const t=bebeToday(),f=bebeFound();
   return{status:`<div class="bebestat${f?' done':''}"><img src="${BEBE}" alt=""><div><b>${f?'You found Bebe today! 🎉':'Find Bebe! 🐶'}</b><small>${f?`Found ${S.bebe.found} time${S.bebe.found===1?'':'s'} · ${S.bebe.streak}-day streak${S.bebe.streak>1?' 🔥':''}. She'll hide somewhere new tomorrow!`
@@ -3339,7 +3551,7 @@ function bindBebe(){const b=document.getElementById('bebeBtn'),h=document.getEle
   if(S.bebe.hint&&S.bebe.hintDay!==today){S.bebe.hint=false;save()}
   if(b)b.onclick=e=>{e.stopPropagation();if(bebeFound()||b.dataset.done)return;b.dataset.done=1;b.disabled=true;const B=S.bebe;B.streak=B.last===yest?B.streak+1:1;B.last=today;B.day=today;B.found++;
     b.classList.add('found');sfx(880,.1);setTimeout(()=>sfx(1175,.12),100);setTimeout(()=>sfx(1568,.18),200);
-    const prize=bebePrize();B.hint=false;save();burst(e.clientX||innerWidth/2,e.clientY||innerHeight/2,['🐶','🐾','⭐','🎉','❤️']);
+    const prize=bebePrize();B.hint=false;save();mission('bebe');burst(e.clientX||innerWidth/2,e.clientY||innerHeight/2,['🐶','🐾','⭐','🎉','❤️']);
     const line=['Woof! You found me!','Yip yip! How did you find me?','Arf! You are the best seeker!','Woof woof! My tail is wagging!','You found me! Again tomorrow?'][rnd(5)];
     setTimeout(()=>{modal(`<div class="bebewin"><img src="${BEBE}" alt="Bebe"><h3>You found Bebe!</h3><p class="bubble">${line}</p>
       <p class="reward">${prize}</p><p class="small">Found ${B.found} time${B.found===1?'':'s'} · ${B.streak}-day streak${B.streak>1?' 🔥':''}</p><div class="rbtns"><button id="bebeOk" class="go">Yay! 🐾</button></div></div>`);
