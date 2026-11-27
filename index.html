@@ -715,6 +715,31 @@ body.onbreak .musicbtn{display:none}
 @media(max-width:600px){.frow{grid-template-columns:30px 1fr 70px 80px;font-size:15px}.fst{font-size:18px}.wtop{grid-template-columns:1fr}}
 .cimg{font-size:96px;line-height:1.1;width:auto}.fic{font-size:44px}.chiefnote span{font-style:italic}
 @media(max-width:600px){.rarelist{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* bank vault */
+.vault{max-width:560px;margin:6px auto 30px;text-align:center;background:radial-gradient(circle at 50% 30%,#4a5563,#232a33 70%);border:3px solid var(--ink);border-radius:18px;box-shadow:4px 4px 0 var(--ink);padding:16px 14px 18px;color:#eef2f6}
+.vtitle h2{margin:0;font-family:'Playfair Display',Georgia,serif;font-size:30px;color:#f6d13a;text-shadow:0 2px 0 #000}.vtitle p{margin:6px 0 10px;font-size:18px;min-height:2.6em}
+.vdoor{position:relative;width:280px;height:280px;margin:0 auto 14px;perspective:900px}
+.vring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(#8a96a3,#d7dde3,#7a8591,#c9d0d7,#8a96a3);border:6px solid #1c2229;box-shadow:inset 0 0 0 10px #59636e,0 10px 30px rgba(0,0,0,.6)}
+.vbolt{position:absolute;left:50%;top:50%;width:18px;height:34px;margin:-17px 0 0 -9px;background:linear-gradient(#f0f3f6,#8e98a3);border:2px solid #1c2229;border-radius:5px;transition:all .5s ease}
+.vface{position:absolute;inset:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#c4ccd4,#7d8893 60%,#5b6571);border:5px solid #1c2229;transform-origin:0 50%;transition:transform 1s cubic-bezier(.5,0,.3,1),box-shadow 1s}
+.vwheel{position:absolute;left:50%;top:42%;width:120px;height:120px;margin:-60px 0 0 -60px;transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.vwheel i{position:absolute;left:50%;top:0;width:12px;height:120px;margin-left:-6px;background:linear-gradient(90deg,#9aa4ae,#eef1f4,#9aa4ae);border:2px solid #1c2229;border-radius:6px}
+.vwheel b{position:absolute;inset:36px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f6e08a,#c99a24);border:3px solid #1c2229}
+.vlight{position:absolute;right:30px;top:30px;width:18px;height:18px;border-radius:50%;background:#3b0d0d;border:2px solid #1c2229;transition:all .2s}
+.vlight.red{background:#ff3b30;box-shadow:0 0 14px #ff3b30}.vlight.green{background:#34c759;box-shadow:0 0 16px #34c759}
+.vscreen{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);background:#0f1a12;color:#7bed9f;border:3px solid #1c2229;border-radius:8px;padding:2px 12px;font:900 24px 'Courier New',monospace;letter-spacing:8px;white-space:nowrap}
+.vscreen span.on{text-shadow:0 0 8px #7bed9f}
+.vdoor.shake{animation:vshake .45s ease}@keyframes vshake{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
+.vdoor.unbolt .vbolt{height:14px;margin-top:-7px;opacity:.6}
+.vdoor.open .vring{background:radial-gradient(circle,#fff6c9,#f6d13a 45%,#c98a1a)}.vdoor.open .vface{transform:rotateY(-105deg);box-shadow:-20px 0 40px rgba(0,0,0,.6)}
+.vpad{display:grid;grid-template-columns:repeat(3,84px);gap:12px;justify-content:center}
+.vpad button{height:66px;font:900 28px/1 'Courier New',monospace;background:linear-gradient(#e8ecf0,#a9b3bd);color:#1c2229;border:3px solid #1c2229;border-radius:12px;box-shadow:0 4px 0 #1c2229;padding:0}
+.vpad button:active{transform:translateY(3px);box-shadow:0 1px 0 #1c2229}.vpad .vok{background:linear-gradient(#ffe27a,#d9a520)}
+.vhelp{font-size:15px;color:#c3ccd5;margin:14px 0 0}
+#bankbox.vin{animation:vin .7s ease both}@keyframes vin{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+@media(max-width:600px){.vdoor{width:230px;height:230px}.vwheel{transform-origin:center}.vpad{grid-template-columns:repeat(3,72px)}}
+.bankframe{display:block;width:100%;height:calc(100dvh - 120px);min-height:620px;border:3px solid var(--ink);border-radius:14px;box-shadow:4px 4px 0 var(--ink);background:#171037}
+#bankview{padding-top:6px;padding-bottom:30px}
 </style>
 </head>
 <body>
@@ -733,6 +758,7 @@ body.onbreak .musicbtn{display:none}
   <button id="tGames">Puzzles &amp; games</button>
   <button id="tFavs">Scrapbook</button>
   <button id="tFame">🏆 Hall of Fame</button>
+  <button id="tBank">🏦 Bank</button>
   <button id="bonus">Extra! Bonus panda</button>
 </nav>
 <div class="page wrap">
@@ -786,6 +812,7 @@ body.onbreak .musicbtn{display:none}
     <section class="box bdaybox" id="bdaybox" hidden></section>
   </aside>
 </div>
+<div id="bankview" class="wrap" hidden></div>
 <footer class="foot wrap"><span>Printed with love for Rishi · Delivered fresh every morning</span><button id="parentBtn">Parent corner</button></footer>
 <div id="toasts" aria-live="polite" aria-atomic="true" role="status"></div>
 <div class="modal" id="modal" hidden></div>
@@ -1015,9 +1042,11 @@ const main=document.getElementById('main'),bonusBtn=document.getElementById('bon
 let view='today',all=[];
 S.bonus=S.bonusDay===today?S.bonus||[]:[];S.bonusDay=today;
 
-const TABS={world:'tWorld',today:'tToday',pet:'tPet',album:'tAlbum',art:'tArt',games:'tGames',favs:'tFavs',fame:'tFame'};
+const TABS={world:'tWorld',today:'tToday',pet:'tPet',album:'tAlbum',art:'tArt',games:'tGames',favs:'tFavs',fame:'tFame',bank:'tBank'};
 function render0(){
   document.body.dataset.view=view;
+  {const bv=document.getElementById('bankview'),pg=document.querySelector('.page');if(bv)bv.hidden=view!=='bank';if(pg)pg.hidden=view==='bank';if(view!=='bank'){bankOpen=false;clearTimeout(vaultT)}}
+  if(view==='bank'){for(const[v,id] of Object.entries(TABS))document.getElementById(id).classList.toggle('on',view===v);showBank();return}
   for(const[v,id] of Object.entries(TABS))document.getElementById(id).classList.toggle('on',view===v||(v==='world'&&['school','story','chat','spring'].includes(view)));
   document.getElementById('tPet').textContent=`My panda · 🎋 ${S.treats}`;
   bonusBtn.style.display=view==='today'&&S.set.feeds&&S.set.bonus>0?'':'none';
@@ -2143,11 +2172,14 @@ function parentPage(){
   </div>
   <p class="pstats">Treats: ${S.treats} · Stickers: ${STK.filter(s=>S.stk[s[0]]).length}/${STK.length} · Pets: ${S.pets.length?S.pets.map(p=>esc(p.name)).join(', '):'none adopted yet'} · Letters sent: ${S.letters.length}</p>
   ${backupHTML()}${(()=>{try{return localStorage.getItem(KEY+'-prev')?'<div class="rbtns left"><button id="pundo">↩️ Undo the last restore</button></div>':''}catch(e){return''}})()}<h3 class="psec">Other</h3>
-  <div class="rbtns left"><button id="ptreat">Give Rishi 5 treats</button><button id="preset" class="danger">Reset all progress…</button></div><div id="pconf"></div></div>`;
+  <p class="small"><b>Note:</b> The bank vault code is a casual gate to keep little fingers out, not real security. Money Monsters keeps its own saved data and its own Parent Zone PIN, separate from this app's backup.</p>
+  <div class="rbtns left"><button id="pvault">🏦 Reset Rishi's bank vault code</button><button id="ptreat">Give Rishi 5 treats</button><button id="preset" class="danger">Reset all progress…</button></div><div id="pconf"></div></div>`;
   const q=id=>document.getElementById(id);
   const setB=()=>{S.set.bday=q('pbm').value&&q('pbd').value?q('pbm').value+'-'+q('pbd').value:'';S.bdaySetByParent=true;save();bdayBox()};
   q('pbm').onchange=setB;q('pbd').onchange=setB;
   if(q('pundo'))q('pundo').onclick=()=>{try{const p=localStorage.getItem(KEY+'-prev');if(p){localStorage.setItem(KEY,p);localStorage.removeItem(KEY+'-prev');location.reload()}}catch(e){toast('Could not undo, sorry.')}};
+  q('pvault').onclick=()=>{if(!S.set.vault){toast('🏦 Rishi has not made a vault code yet. He will make one the first time he opens the Bank.');return}
+    S.set.vault=null;bankOpen=false;save();toast('🏦 Vault code reset. Rishi will make a new one next time he opens the Bank.')};
   q('pmic').onchange=()=>{S.set.mic=q('pmic').checked;save()};
   q('pcds').onchange=()=>{S.set.cds=q('pcds').value.split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{const m=/^(\d{4}-\d{2}-\d{2})\s+(\S+)?\s*(.*)$/.exec(l);if(!m||isNaN(new Date(m[1]+'T12:00')))return null;
       const ic=m[2]&&!/^[\w]/.test(m[2])?m[2]:'⭐',t=(ic===m[2]?m[3]:((m[2]||'')+' '+m[3])).replace(/[<>&"']/g,'').trim().slice(0,40)||'Something special';return{date:m[1],icon:ic.slice(0,8),t,from:today}}).filter(Boolean).slice(0,6);
@@ -2181,7 +2213,7 @@ function parentPage(){
 }
 document.getElementById('parentBtn').onclick=()=>gate(()=>{endGame();view='parent';render();scrollTo({top:0})});
 let onBreak=false;
-function breakLock(on){['main','nav','.side','.mast','#musicBtn'].forEach(sel=>{const el=document.querySelector(sel);if(!el)return;if(on){el.setAttribute('inert','');el.setAttribute('aria-hidden','true')}else{el.removeAttribute('inert');el.removeAttribute('aria-hidden')}});
+function breakLock(on){['main','nav','.side','.mast','#musicBtn','#bankview'].forEach(sel=>{const el=document.querySelector(sel);if(!el)return;if(on){el.setAttribute('inert','');el.setAttribute('aria-hidden','true')}else{el.removeAttribute('inert');el.removeAttribute('aria-hidden')}});
   document.body.classList.toggle('onbreak',on);if(on){S.musicMuted=true;try{musicSync()}catch(e){}try{speechSynthesis.cancel()}catch(e){}}}
 function checkLimit(){if(!S.set.limit||onBreak||S.time.s<(S.set.limit+S.time.extra)*60)return;onBreak=true;endGame();breakLock(true);
   const show=()=>{modal(`<div class="medal">😴</div><h3>Time for a break, Rishi!</h3><p>Chief Bamboozle is taking a nap now. Come back tomorrow for a brand new paper!</p>
@@ -3311,6 +3343,44 @@ BADGES.push(['key1','🔑','Mission Accomplished',"Finish all 3 of Chief's missi
   ['rare1','💎','Treasure Hunter','Find your first rare outfit',s=>Object.keys(S.rare||{}).length>=1],
   ['rareall','👑','Captain of the Ship','Find every rare outfit',s=>RARE.every(r=>(S.rare||{})[r])],
   ['report1','🗞️','Cub Reporter','Write a story for the front page',s=>S.reports.length>=1]);
+
+// ---- Bank tab: Rishi's Money Monsters, kept in its own frame with its own saved data
+let bankFrame=null,bankOpen=false,vaultT=0;
+function bankLoad(box){if(bankFrame)return;
+  try{bankFrame=document.createElement('iframe');bankFrame.className='bankframe';bankFrame.title="Rishi's Money Monsters";bankFrame.src='money-monsters-rishi.html';box.appendChild(bankFrame)}
+  catch(e){box.innerHTML='<div class="msg">Sorry, the bank could not open. Please try again.</div>';window.__showErr&&window.__showErr('bank: '+e.message)}}
+function showBank(){const bv=document.getElementById('bankview');
+  if(!document.getElementById('bankbox'))bv.innerHTML='<div id="vaultui"></div><div id="bankbox" hidden></div>';
+  const box=document.getElementById('bankbox'),ui=document.getElementById('vaultui');
+  if(bankOpen){ui.hidden=true;box.hidden=false;return}
+  box.hidden=true;ui.hidden=false;vaultScreen(ui)}
+const vclick=(f)=>{try{sfx(f||900,.03,'square',.08)}catch(e){}};
+function vaultScreen(ui){const setup=!S.set.vault;let v='',first='',fails=0,busy=false;
+  ui.innerHTML=`<div class="vault${setup?' setup':''}"><div class="vtitle"><h2>🏦 Rishi's Bank Vault</h2><p id="vmsg">${setup?'Make your own secret vault code! Pick 4 numbers only you know.':'Type your secret code to open the vault.'}</p></div>
+    <div class="vdoor" id="vdoor"><div class="vring">${[0,1,2,3,4,5,6,7].map(i=>`<i class="vbolt" style="transform:rotate(${i*45}deg) translateY(-118px)"></i>`).join('')}</div>
+      <div class="vface"><div class="vwheel" id="vwheel">${[0,1,2,3,4,5].map(i=>`<i style="transform:rotate(${i*60}deg)"></i>`).join('')}<b></b></div>
+      <div class="vlight" id="vlight"></div><div class="vscreen" id="vscreen"></div></div></div>
+    <div class="vpad">${[1,2,3,4,5,6,7,8,9].map(n=>`<button data-k="${n}">${n}</button>`).join('')}<button data-k="x" aria-label="Delete">⌫</button><button data-k="0">0</button><button data-k="ok" class="vok" aria-label="Open">🔓</button></div>
+    <p class="vhelp">${setup?'Tip: pick numbers you can remember, like a special date. Don\'t tell anyone!':'Forgot your code? Ask a grown-up to reset it in the Parent corner.'}</p></div>`;
+  const scr=document.getElementById('vscreen'),msg=t=>document.getElementById('vmsg').textContent=t,light=c=>{document.getElementById('vlight').className='vlight '+c};
+  const dots=()=>{scr.innerHTML=[0,1,2,3].map(i=>`<span class="${i<v.length?'on':''}">${i<v.length?'●':'○'}</span>`).join('')};dots();
+  const wheel=document.getElementById('vwheel');let ang=0;const turn=d=>{ang+=d;wheel.style.transform=`rotate(${ang}deg)`};
+  const wrong=t=>{busy=true;light('red');try{sfx(160,.3,'sawtooth',.15)}catch(e){}const d=document.getElementById('vdoor');d.classList.remove('shake');void d.offsetWidth;d.classList.add('shake');msg(t);
+    setTimeout(()=>{v='';dots();light('');busy=false},900)};
+  const open=()=>{busy=true;light('green');msg(setup?'🎉 Your vault code is saved! Opening the vault…':'✅ Correct! Opening the vault…');
+    const d=document.getElementById('vdoor');try{sfx(90,.35,'sawtooth',.15);setTimeout(()=>sfx(140,.2,'square',.12),400)}catch(e){}
+    turn(720);setTimeout(()=>d.classList.add('unbolt'),700);setTimeout(()=>{d.classList.add('open');try{sfx(1320,.25)}catch(e){}},1300);
+    setTimeout(()=>{try{burst(innerWidth/2,innerHeight/2,['💰','🪙','✨','💎'])}catch(e){}},1500);
+    if(!setup)speak(['Welcome to your vault, Rishi!','Vault open! Your money monsters are waiting.','Access granted! Hello, Rishi!'][rnd(3)]);
+    vaultT=setTimeout(()=>{if(view!=='bank')return;bankOpen=true;const box=document.getElementById('bankbox');bankLoad(box);ui.hidden=true;box.hidden=false;box.classList.remove('vin');void box.offsetWidth;box.classList.add('vin');scrollTo({top:0})},2300)};
+  const enter=()=>{if(v.length<4||busy)return;
+    if(setup){if(!first){first=v;v='';dots();turn(-90);msg('Great! Now type the same code again to lock it in.');return}
+      if(v!==first){first='';wrong("Those didn't match. Let's start again: pick 4 numbers.");return}
+      S.set.vault=v;save();open();return}
+    if(v===S.set.vault){fails=0;open()}else{fails++;wrong(fails>=3?'Not quite! Forgot your code? A grown-up can reset it in the Parent corner.':'Wrong code! The vault is still locked. Try again.')}};
+  ui.querySelector('.vpad').onclick=e=>{const b=e.target.closest('button');if(!b||busy)return;const k=b.dataset.k;
+    if(k==='x'){v=v.slice(0,-1);turn(-30);vclick(600)}else if(k==='ok'){enter();return}else if(v.length<4){v+=k;turn(30+rnd(30));vclick(800+rnd(400))}
+    dots();if(v.length===4)setTimeout(enter,220)}}
 
 function goSpot(id){endGame();if(id==='temple'){view='missions';render();scrollTo({top:0});return}if(id==='ship'){view='ship';render();scrollTo({top:0});return}if(id==='cable'){view='cable';render();scrollTo({top:0});return}const v={newsroom:'today',house:'pet',art:'art',games:'games',school:'school',chat:'chat',story:'story',forest:'pet',spring:'spring',mountain:'fame',stickers:'album'}[id];
   if(id==='house')petTab='care';if(id==='forest')petTab='park';
