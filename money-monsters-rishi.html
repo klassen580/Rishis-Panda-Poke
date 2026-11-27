@@ -744,4 +744,8 @@ render();setTimeout(checkDividend,700);
 })();
 </script><script>
 (function(){const lab=()=>{const l=document.getElementById('parent-profile-label');if(l)l.textContent="Editing Rishi's portfolio"};lab();document.getElementById('open-parent').addEventListener('click',()=>setTimeout(lab,30));const t=document.querySelector('meta[name="apple-mobile-web-app-title"]');if(t)t.content="Rishi's Monsters"})();
+</script><script>/* Panda Poke: parent controls live in the Parent corner; hide the Parent Zone button inside the kid's Bank */
+(function(){try{var b=document.getElementById('open-parent');if(!b)return;
+  if(location.hash==='#parent'){document.documentElement.classList.add('mm-parentmode');setTimeout(function(){b.click()},350)}
+  else if(window.top!==window.self){b.hidden=true;b.style.display='none';var p=b.parentElement;if(p&&p.children.length===1)p.style.display='none'}}catch(e){}})();
 </script></body></html>

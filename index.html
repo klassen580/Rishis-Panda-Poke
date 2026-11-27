@@ -740,6 +740,7 @@ body.onbreak .musicbtn{display:none}
 @media(max-width:600px){.vdoor{width:230px;height:230px}.vwheel{transform-origin:center}.vpad{grid-template-columns:repeat(3,72px)}}
 .bankframe{display:block;width:100%;height:calc(100dvh - 120px);min-height:620px;border:3px solid var(--ink);border-radius:14px;box-shadow:4px 4px 0 var(--ink);background:#171037}
 #bankview{padding-top:6px;padding-bottom:30px}
+#mmctl{position:fixed;inset:0;z-index:200;background:#171037;display:flex;flex-direction:column}#mmctl .mmbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px;background:#2b1d10;color:#f6e3a1;font-size:18px}#mmctl .mmbar button{margin:0}#mmctl iframe{flex:1;width:100%;border:0;background:#171037}
 </style>
 </head>
 <body>
@@ -2172,12 +2173,16 @@ function parentPage(){
   </div>
   <p class="pstats">Treats: ${S.treats} · Stickers: ${STK.filter(s=>S.stk[s[0]]).length}/${STK.length} · Pets: ${S.pets.length?S.pets.map(p=>esc(p.name)).join(', '):'none adopted yet'} · Letters sent: ${S.letters.length}</p>
   ${backupHTML()}${(()=>{try{return localStorage.getItem(KEY+'-prev')?'<div class="rbtns left"><button id="pundo">↩️ Undo the last restore</button></div>':''}catch(e){return''}})()}<h3 class="psec">Other</h3>
+  <h3 class="psec">💰 Money Monsters (the Bank)</h3>
+  <p>Update Rishi's portfolio, deposits and missions, and back up his Money Monsters data. Rishi can't see these controls in his Bank. They need the Money Monsters passcode, so they're locked twice.</p>
+  <div class="rbtns left"><button id="pmm" class="go">🔒 Open Money Monsters controls</button></div>
   <p class="small"><b>Note:</b> The bank vault code is a casual gate to keep little fingers out, not real security. Money Monsters keeps its own saved data and its own Parent Zone PIN, separate from this app's backup.</p>
   <div class="rbtns left"><button id="pvault">🏦 Reset Rishi's bank vault code</button><button id="ptreat">Give Rishi 5 treats</button><button id="preset" class="danger">Reset all progress…</button></div><div id="pconf"></div></div>`;
   const q=id=>document.getElementById(id);
   const setB=()=>{S.set.bday=q('pbm').value&&q('pbd').value?q('pbm').value+'-'+q('pbd').value:'';S.bdaySetByParent=true;save();bdayBox()};
   q('pbm').onchange=setB;q('pbd').onchange=setB;
   if(q('pundo'))q('pundo').onclick=()=>{try{const p=localStorage.getItem(KEY+'-prev');if(p){localStorage.setItem(KEY,p);localStorage.removeItem(KEY+'-prev');location.reload()}}catch(e){toast('Could not undo, sorry.')}};
+  q('pmm').onclick=openMMControls;
   q('pvault').onclick=()=>{if(!S.set.vault){toast('🏦 Rishi has not made a vault code yet. He will make one the first time he opens the Bank.');return}
     S.set.vault=null;bankOpen=false;save();toast('🏦 Vault code reset. Rishi will make a new one next time he opens the Bank.')};
   q('pmic').onchange=()=>{S.set.mic=q('pmic').checked;save()};
@@ -3382,6 +3387,12 @@ function vaultScreen(ui){const setup=!S.set.vault;let v='',first='',fails=0,busy
     if(k==='x'){v=v.slice(0,-1);turn(-30);vclick(600)}else if(k==='ok'){enter();return}else if(v.length<4){v+=k;turn(30+rnd(30));vclick(800+rnd(400))}
     dots();if(v.length===4)setTimeout(enter,220)}}
 
+function openMMControls(){let o=document.getElementById('mmctl');if(o)o.remove();
+  o=document.createElement('div');o.id='mmctl';o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-label','Money Monsters controls');
+  o.innerHTML='<div class="mmbar"><b>🔒 Money Monsters controls</b><button id="mmclose" class="go">Done</button></div><iframe title="Money Monsters controls" src="money-monsters-rishi.html#parent"></iframe>';
+  document.body.appendChild(o);document.body.style.overflow='hidden';
+  o.querySelector('#mmclose').onclick=()=>{o.remove();document.body.style.overflow='';
+    if(bankFrame){try{bankFrame.contentWindow.location.reload()}catch(e){bankFrame.remove();bankFrame=null}}toast('💰 Money Monsters updated.')}}
 function goSpot(id){endGame();if(id==='temple'){view='missions';render();scrollTo({top:0});return}if(id==='ship'){view='ship';render();scrollTo({top:0});return}if(id==='cable'){view='cable';render();scrollTo({top:0});return}const v={newsroom:'today',house:'pet',art:'art',games:'games',school:'school',chat:'chat',story:'story',forest:'pet',spring:'spring',mountain:'fame',stickers:'album'}[id];
   if(id==='house')petTab='care';if(id==='forest')petTab='park';
   if(id==='market'||id==='lake'){view='games';render();openGame(id==='market'?'snack':'jump');scrollTo({top:0});return}
